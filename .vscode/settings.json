@@ -56,5 +56,5 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "Luna's Donut Shop.sln"
+    "dotnet.defaultSolution": "Lunas-Donut-Shop.sln"
 }
