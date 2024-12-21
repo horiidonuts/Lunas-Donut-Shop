@@ -27,13 +27,13 @@ public class Movement : MonoBehaviour
         float x_input = input.x;
         float z_input = input.z;
 
-        if (x_input > Mathf.Epsilon || x_input < -Mathf.Epsilon)
+        if (input.z > Mathf.Epsilon || input.z < -Mathf.Epsilon)
         {
             rawInput = new Vector3(z_input * -0.5f, input.y, z_input * -0.5f);
         }
-        else if(z_input > Mathf.Epsilon || x_input < -Mathf.Epsilon)
+        else if(input.x > Mathf.Epsilon || input.x < -Mathf.Epsilon)
         {
-            rawInput = new Vector3(x_input * -0.5f, input.y, x_input * -0.5f);
+            rawInput = new Vector3(x_input * -0.5f, input.y, x_input * 0.5f);
         }
 
         else 
