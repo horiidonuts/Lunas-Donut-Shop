@@ -738,6 +738,7 @@ Transform:
   - {fileID: 1283536923}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+<<<<<<< Updated upstream
 --- !u!1 &408078287
 GameObject:
   m_ObjectHideFlags: 0
@@ -794,6 +795,8 @@ Transform:
   - {fileID: 1441029474}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+=======
+>>>>>>> Stashed changes
 --- !u!1 &457072593
 GameObject:
   m_ObjectHideFlags: 0
@@ -1193,6 +1196,7 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8b6ca04c3b15a4d448939a41a17a9cfb, type: 3}
+<<<<<<< Updated upstream
 --- !u!1 &651771160
 GameObject:
   m_ObjectHideFlags: 0
@@ -1254,6 +1258,8 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 8b6ca04c3b15a4d448939a41a17a9cfb, type: 3}
   m_PrefabInstance: {fileID: 636501928}
   m_PrefabAsset: {fileID: 0}
+=======
+>>>>>>> Stashed changes
 --- !u!1 &699249821
 GameObject:
   m_ObjectHideFlags: 0
@@ -1376,8 +1382,11 @@ GameObject:
   - component: {fileID: 700914172}
   - component: {fileID: 700914175}
   - component: {fileID: 700914176}
+<<<<<<< Updated upstream
   - component: {fileID: 700914178}
   - component: {fileID: 700914177}
+=======
+>>>>>>> Stashed changes
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1474,7 +1483,12 @@ Transform:
   m_LocalPosition: {x: 0.276, y: 0.284, z: 0.318}
   m_LocalScale: {x: 0.8361652, y: 1, z: 1.1638348}
   m_ConstrainProportionsScale: 0
+<<<<<<< Updated upstream
   m_Children: []
+=======
+  m_Children:
+  - {fileID: 708588517}
+>>>>>>> Stashed changes
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: -135, z: 0}
 --- !u!114 &700914175
@@ -1520,6 +1534,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 1
+<<<<<<< Updated upstream
 --- !u!54 &700914177
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1570,6 +1585,8 @@ CapsuleCollider:
   m_Height: 0.49
   m_Direction: 1
   m_Center: {x: 0.02, y: -0.01, z: 0}
+=======
+>>>>>>> Stashed changes
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -4064,7 +4081,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4603805960220150094, guid: c71b988103ef0a747af0a8539ca54b10, type: 3}
       propertyPath: m_LocalPosition.z
+<<<<<<< Updated upstream
       value: -1.804
+=======
+      value: -1.902
+>>>>>>> Stashed changes
       objectReference: {fileID: 0}
     - target: {fileID: 4603805960220150094, guid: c71b988103ef0a747af0a8539ca54b10, type: 3}
       propertyPath: m_LocalRotation.w
