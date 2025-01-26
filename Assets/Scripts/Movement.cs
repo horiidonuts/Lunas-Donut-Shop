@@ -123,7 +123,6 @@ public class Movement : MonoBehaviour
             animator.SetBool(wRightHash,false);
         }
 
-        Debug.Log(direction);
 
     }
 
