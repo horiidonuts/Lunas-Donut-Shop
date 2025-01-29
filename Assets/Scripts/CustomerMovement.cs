@@ -5,7 +5,7 @@ public class CustomerMovement : MonoBehaviour
     public Transform target; //hedef chair pozisyonu
     public float speed; //customer hareket hızı
     private bool hasReachedTarget = false; //hedefe ulaşıldı mı kontrolü
-        public GameObject orderSphere;
+    public GameObject orderSphere;
 
 
 
@@ -50,7 +50,7 @@ public class CustomerMovement : MonoBehaviour
     }
 
 
-       public void SetRandomTarget()
+    public void SetRandomTarget()
     {
         if (DeskStateControl.Chairs != null) // Eğer chairs listesi boş değilse ve chairs listesinde eleman varsa
         {
@@ -60,7 +60,7 @@ public class CustomerMovement : MonoBehaviour
     }
 
 
-public void SetActive_orderSphere()
+    public void SetActive_orderSphere()
     { 
         orderSphere.SetActive(true); // OrderSphere objesini aktif hale getir 
         //eray-animasyonla yukarı aşağı hareket ettirebilirsin küreyi.
