@@ -47,6 +47,7 @@ public class PanelAnimHandler : MonoBehaviour
     public void ClosePanel()
     {
         anim.SetBool("panel_open", false);
+        player.GetComponentInParent<TakeOrder>().playerHasOrder = false;
     }
 
     private void GetPlayerOrderState()

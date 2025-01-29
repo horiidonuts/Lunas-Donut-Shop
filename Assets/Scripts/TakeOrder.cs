@@ -46,4 +46,9 @@ public class TakeOrder : MonoBehaviour
         var customerMovement = customer.GetComponent<CustomerMovement>();
         customerMovement.SetDeactive_orderSphere();
     }
+
+    public void ResetOrderState()
+    {
+        playerHasOrder = false;
+    }
 }
