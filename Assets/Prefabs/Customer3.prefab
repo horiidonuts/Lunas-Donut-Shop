@@ -120,7 +120,7 @@ GameObject:
   - component: {fileID: 6819243529260838614}
   - component: {fileID: 5461211649528942835}
   - component: {fileID: 3855576827282146634}
-  - component: {fileID: 2420668238104961611}
+  - component: {fileID: 5612163723872698328}
   m_Layer: 0
   m_Name: Customer3
   m_TagString: customer
@@ -220,7 +220,7 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
---- !u!114 &2420668238104961611
+--- !u!114 &5612163723872698328
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -233,5 +233,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
-  speed: 1
   orderSphere: {fileID: 1720471375856835374}

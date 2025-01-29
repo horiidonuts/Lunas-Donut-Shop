@@ -4,40 +4,34 @@ using System.Collections.Generic;
 
 public class CustomerSpawn : MonoBehaviour
 {
+    public static CustomerSpawn Instance;
+    public GameObject[] customerPrefabs;
+    public Transform spawnPoint;
+    public int poolSize=1;
+    public List<GameObject> customerPool;
+    private int currentCustomerIndex=0;
+    private bool isSpawning=false;
 
-    public static CustomerSpawn Instance; //singleton
-    public GameObject[] customerPrefabs; //customer prefabs
-    public Transform spawnPoint; //spawn point
-    public int poolSize = 1; //pool size
-     public List<GameObject> customerPool; //customer pool
-
-        private int currentCustomerIndex = 0;  // Müşteri havuzundan hangi müşteriyi alacağımızı belirleyen index
-        //private float spawnInterval = 2.0f; // Müşteri oluşturma aralığı
-       // private float nextSpawnTime = 0f; // Bir sonraki müşteri oluşturma zamanı
-         private bool isSpawning = false; // Müşteri oluşturuluyor mu kontrolü
-
-     void Awake()
+    void Awake()
     {
-        if (Instance == null)
+        if(Instance==null)
         {
-            Instance = this;
+            Instance=this;
         }
         else
         {
             Destroy(gameObject);
         }
 
-    
-        customerPool = new List<GameObject>(); // Müşteri havuzunu oluştur
+        customerPool=new List<GameObject>();
 
-        // Initialize the pool
-        for (int i = 0; i < poolSize; i++)
+                for (int i = 0; i < poolSize; i++)
         {
             foreach (var prefab in customerPrefabs)
             {
                 GameObject obj = Instantiate(prefab);
                 obj.SetActive(false);
-                customerPool.Add(obj);
+                customerPool.Add(obj); // Müşteriyi havuza ekle
             }
         }
     }
@@ -45,49 +39,48 @@ public class CustomerSpawn : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.X) && !isSpawning)
+         if (Input.GetKeyDown(KeyCode.X) && !isSpawning)
         {
             SpawnCustomer();
         }
-
-
-       
     }
 
 
-     /*private IEnumerator SpawnCustomerRoutine()
+
+    public void SpawnCustomer()
     {
-        isSpawning = true;
-        while (true)
+        bool allActive=true;
+        foreach (GameObject customer in customerPool)
         {
-            SpawnCustomer();
-            yield return new WaitForSeconds(spawnInterval);
-        }
-    }*/
-
-
-   public void SpawnCustomer()
-    {
-        // Havuzdaki tüm objelerin aktif olup olmadığını kontrol et
-        bool allActive = true; // Tüm objeler aktif mi kontrolü
-        foreach (GameObject customer in customerPool) // Havuzdaki tüm objeleri kontrol et
-        { // Eğer bir obje aktif değilse tüm objeler aktif değil demektir
-            if (!customer.activeInHierarchy) // Eğer bir obje aktif değilse
-            { 
-                allActive = false; // Tüm objeler aktif değil
-                break; // Döngüyü sonlandır
+            if(!customer.activeInHierarchy)
+            {
+                allActive=false;
+                break;
             }
+
         }
 
-        // Eğer tüm objeler aktif değilse yeni bir müşteri oluştur
-        if (!allActive) // Eğer tüm objeler aktif değilse
+        if(!allActive)
         {
-            GameObject customer = customerPool[currentCustomerIndex]; // Müşteri havuzundan bir müşteri al
-            customer.transform.position = spawnPoint.position; // Müşteriyi spawn pointe yerleştir
-            customer.SetActive(true); // Müşteriyi aktif hale getir
-
-            currentCustomerIndex = (currentCustomerIndex + 1) % customerPool.Count; // Bir sonraki müşteri indexini belirle
+            GameObject customer=customerPool[currentCustomerIndex];
+            customer.transform.position=spawnPoint.position;
+            customer.SetActive(true);
+            currentCustomerIndex=(currentCustomerIndex+1)%customerPool.Count;
+            
         }
+
+
+         
+
+
     }
+
+
+
+
+
+
+
+
 
 }

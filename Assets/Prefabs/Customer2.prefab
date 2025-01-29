@@ -120,7 +120,7 @@ GameObject:
   - component: {fileID: 9140736227816015397}
   - component: {fileID: 392571427164492666}
   - component: {fileID: 4338410383338384716}
-  - component: {fileID: 3106002553370066701}
+  - component: {fileID: 693660665091560886}
   m_Layer: 0
   m_Name: Customer2
   m_TagString: customer
@@ -218,7 +218,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &3106002553370066701
+--- !u!114 &693660665091560886
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -231,5 +231,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
-  speed: 1
   orderSphere: {fileID: 5067636104755366259}

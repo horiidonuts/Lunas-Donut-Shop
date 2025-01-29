@@ -11,6 +11,7 @@ public class CustomerMovement : MonoBehaviour
 
     void Start()
     {
+        speed = 1f; // Hızı belirle
       SetRandomTarget(); // Rastgele bir hedef belirleme metodunu çağır
 
     }
