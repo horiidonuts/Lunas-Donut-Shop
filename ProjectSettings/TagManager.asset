@@ -7,6 +7,7 @@ TagManager:
   - chair
   - orderSphere
   - customer
+  - Panel
   layers:
   - Default
   - TransparentFX

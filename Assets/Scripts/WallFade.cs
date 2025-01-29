@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.PlayerLoop;
 
@@ -11,7 +12,7 @@ public class WallFade : MonoBehaviour
 
     [SerializeField] float minFade;
     [SerializeField] float fadeSpeed = 0.2f;
-    [SerializeField] bool faded = false;
+    [SerializeField] public bool faded = false;
     [SerializeField] GameObject[] walls;
     Dictionary<GameObject, Material> materials = new Dictionary<GameObject, Material>();
     void Start()
@@ -54,17 +55,21 @@ public class WallFade : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        faded = true;
+        
+        if (!faded)
+        {
+            faded = true;
+            Debug.Log("Walls Fading");
+        }
+    }
+
+    void OnTriggerExit(Collider other)
+    {
         if (faded)
         {
-            Debug.Log("WALLS FADING");  
+            faded = false;
+            Debug.Log("Walls Unfading");
         }
         
     }
-    
-    private void OnTriggerExit(Collider other)
-    {
-        faded = false;
-    }
-
 }
