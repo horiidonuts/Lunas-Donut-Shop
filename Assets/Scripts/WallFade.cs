@@ -25,9 +25,13 @@ public class WallFade : MonoBehaviour
             }
             
         }
+
+        if (materials.Count == 0)
+        {
+            originalColor=materials[walls[0]].color;
+        }
         
-        originalColor = material.color;
-        fadeSpeed = 1f / fadeDuration;
+         fadeSpeed = 1f / fadeDuration;
     }
     
     void Update()

@@ -121,6 +121,7 @@ GameObject:
   - component: {fileID: 8692005182156223558}
   - component: {fileID: 5604945953709256558}
   - component: {fileID: 3409103996634354905}
+  - component: {fileID: 3078992885231205772}
   m_Layer: 0
   m_Name: Customer1
   m_TagString: customer
@@ -233,4 +234,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
+  speed: 0
   orderSphere: {fileID: 597373909265431326}
+--- !u!114 &3078992885231205772
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3767437215393595815}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1f64c2ad161543b0b305cc71d1e77b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sauce: 0
