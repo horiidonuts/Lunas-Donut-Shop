@@ -280,7 +280,7 @@ GameObject:
   - component: {fileID: 91437542}
   m_Layer: 0
   m_Name: TableSet1 (1)
-  m_TagString: Untagged
+  m_TagString: table
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -371,6 +371,7 @@ GameObject:
   - component: {fileID: 107635782}
   - component: {fileID: 107635783}
   - component: {fileID: 107635784}
+  - component: {fileID: 107635785}
   m_Layer: 0
   m_Name: Counter
   m_TagString: Untagged
@@ -517,6 +518,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d022bbf032d34192a07d7eedb0efe61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &107635785
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 107635777}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45ac93629023046d5a0a288cf5105b31, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Player_ServiceTransform: {fileID: 337806672}
+  Donut_Prefab: {fileID: 7327461318235903722, guid: 4e99596851fcd4d2a9544db3956be23e, type: 3}
+  Donut: {fileID: 0}
 --- !u!1 &116032381
 GameObject:
   m_ObjectHideFlags: 0
@@ -1482,6 +1498,37 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 4e5e2dd5aca4cbd4d8b6d462d2c9e7cb, type: 3}
   m_PrefabInstance: {fileID: 318295218}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &337806671
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 337806672}
+  m_Layer: 0
+  m_Name: ServiceTransform
+  m_TagString: service
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &337806672
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 337806671}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0, y: 0, z: -0.114}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 700914174}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &345704214
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1696,7 +1743,7 @@ GameObject:
   - component: {fileID: 408078288}
   m_Layer: 0
   m_Name: TableSet1
-  m_TagString: Untagged
+  m_TagString: table
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2830,6 +2877,7 @@ Transform:
   m_Children:
   - {fileID: 846965874}
   - {fileID: 1898935367}
+  - {fileID: 337806672}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: -135.66, z: 0}
 --- !u!114 &700914175

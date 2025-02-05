@@ -9,7 +9,7 @@ public class TakeOrder : MonoBehaviour
     public string CustomerWant_Sauce; //bunu return edecek bir metod yazılabilir.
     
 
-    private GameObject customer;
+    public GameObject customer;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 
     private void Awake()
@@ -23,7 +23,7 @@ public class TakeOrder : MonoBehaviour
         CustomerWant_Sauce = null;
     }
 
-    // Update is called once per frame
+
     void Update()
     {
         if (canTakeOrder && Input.GetKeyDown(KeyCode.E) && !playerHasOrder)
@@ -37,7 +37,6 @@ public class TakeOrder : MonoBehaviour
                 DonutOrder.SauceType DonutSauce = donutOrder.sauce;
                 Debug.Log("Donut Order: " + DonutSauce);
                 CustomerWant_Sauce = DonutSauce.ToString();
-
             }
       }
  }
@@ -46,10 +45,24 @@ public class TakeOrder : MonoBehaviour
     {
         if (other.tag == "customer")
         {
-            customer = other.gameObject;
+            customer = other.gameObject; 
             canTakeOrder = true;
-
+            Transform serviceTransform=other.transform.Find("zone");
+            Debug.Log("customera teslim edildi");
+            if (serviceTransform != null)
+                {
+                    OrderPrepare.Instance.SetDonutParent(serviceTransform);
+                    Debug.Log("ebeveyn");
+                }
+                else
+                {
+                    Debug.Log("transform null");
+                }
+                
+            //otherın altındaki servicezone emptyobjectin transformunu al
         }
+        
+                // child içinde service tagli objenin transformuna orderprepare içindeki
     }
 
     private void OnTriggerExit(Collider other)

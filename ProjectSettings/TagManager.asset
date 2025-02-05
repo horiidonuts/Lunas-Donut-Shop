@@ -8,6 +8,10 @@ TagManager:
   - orderSphere
   - customer
   - Panel
+  - donut
+  - service
+  - table
+  - zone
   layers:
   - Default
   - TransparentFX
