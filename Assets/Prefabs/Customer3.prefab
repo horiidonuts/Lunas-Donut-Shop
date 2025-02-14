@@ -119,7 +119,7 @@ GameObject:
   - component: {fileID: 6298096698314323202}
   m_Layer: 0
   m_Name: Service_Zone
-  m_TagString: zone
+  m_TagString: service
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -133,7 +133,7 @@ Transform:
   m_GameObject: {fileID: 9144516193961718160}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.4251429, z: 0.9712}
+  m_LocalPosition: {x: 0, y: 1.15, z: -0.841}
   m_LocalScale: {x: 0.79999995, y: 1.1428571, z: 0.79999995}
   m_ConstrainProportionsScale: 0
   m_Children: []

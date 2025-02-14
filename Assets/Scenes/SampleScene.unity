@@ -1420,6 +1420,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 294413001}
   m_CullTransparentMesh: 1
+--- !u!1 &301258783
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 301258784}
+  m_Layer: 0
+  m_Name: Exit_Zone
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &301258784
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 301258783}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -2.641, y: 0.119, z: -0.70306796}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &318295218
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2965,6 +2996,8 @@ MonoBehaviour:
   canTakeOrder: 0
   playerHasOrder: 0
   CustomerWant_Sauce: 
+  DonutOrderProcess: 0
+  customer: {fileID: 0}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -8840,6 +8873,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: Counter
       objectReference: {fileID: 0}
+    - target: {fileID: 3310959098696749123, guid: c71b988103ef0a747af0a8539ca54b10, type: 3}
+      propertyPath: m_Name
+      value: Pay_Zone
+      objectReference: {fileID: 0}
+    - target: {fileID: 3310959098696749123, guid: c71b988103ef0a747af0a8539ca54b10, type: 3}
+      propertyPath: m_TagString
+      value: pay_zone
+      objectReference: {fileID: 0}
+    - target: {fileID: 3341156962610662668, guid: c71b988103ef0a747af0a8539ca54b10, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -1.497
+      objectReference: {fileID: 0}
+    - target: {fileID: 3341156962610662668, guid: c71b988103ef0a747af0a8539ca54b10, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.527
+      objectReference: {fileID: 0}
+    - target: {fileID: 3341156962610662668, guid: c71b988103ef0a747af0a8539ca54b10, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.009
+      objectReference: {fileID: 0}
     - target: {fileID: 4603805960220150094, guid: c71b988103ef0a747af0a8539ca54b10, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2.19
@@ -8911,3 +8964,4 @@ SceneRoots:
   - {fileID: 514414270}
   - {fileID: 364981735}
   - {fileID: 116032382}
+  - {fileID: 301258784}

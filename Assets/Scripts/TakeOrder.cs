@@ -8,7 +8,7 @@ public class TakeOrder : MonoBehaviour
     [SerializeField] public bool playerHasOrder = false;
     public string CustomerWant_Sauce; //bunu return edecek bir metod yazılabilir.
     
-
+    public bool DonutOrderProcess = false; //donut garsonun elindeyken true olacak 
     public GameObject customer;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 
@@ -47,17 +47,19 @@ public class TakeOrder : MonoBehaviour
         {
             customer = other.gameObject; 
             canTakeOrder = true;
-            Transform serviceTransform=other.transform.Find("zone");
-            Debug.Log("customera teslim edildi");
-            if (serviceTransform != null)
-                {
-                    OrderPrepare.Instance.SetDonutParent(serviceTransform);
-                    Debug.Log("ebeveyn");
-                }
-                else
-                {
-                    Debug.Log("transform null");
-                }
+            if (DonutOrderProcess)
+            {
+                Transform serviceTransform=customer.transform.Find("Service_Zone");
+                Debug.Log("customera teslim edildi");
+                OrderPrepare.Instance.SetDonutParent(serviceTransform);
+                //customerın içindeki customermovementın içinde sayacı başlat ve kasaya gitsin
+                var customerMovement = customer.GetComponent<CustomerMovement>();
+                //customerMovement.DestroyDonut();
+                StartCoroutine(customerMovement.WaitAndMoveToPayZone()); 
+                DonutOrderProcess = false;
+            } 
+            
+    
                 
             //otherın altındaki servicezone emptyobjectin transformunu al
         }
@@ -88,6 +90,11 @@ public class TakeOrder : MonoBehaviour
     public bool HasPlayerOrder()
     {
         return playerHasOrder;
+    }
+
+    public void SetDonutOrderProcess( )
+    {
+        DonutOrderProcess = true;
     }
 
 

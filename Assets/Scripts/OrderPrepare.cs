@@ -21,6 +21,7 @@ public class OrderPrepare : MonoBehaviour
     {
         Donut_Position= new Vector3(this.gameObject.transform.position.x, 
         this.gameObject.transform.position.y+0.15f, this.gameObject.transform.position.z);
+        Donut=null;
     }
 
     void Update()
@@ -32,14 +33,18 @@ public class OrderPrepare : MonoBehaviour
     }
 
 //0.02+y olsun
-    public void DonutOrder_prepare( )
+    public void DonutOrder_prepare()
     {
          Donut=Instantiate(Donut_Prefab,Donut_Position,Quaternion.identity);
         Debug.Log("Donut Order Prepared"); 
-       Donut.transform.DOJump(Player_ServiceTransform.position, 0.2f, 1, 1f).OnComplete(()=>{
+       //Donut.transform.DOJump(Player_ServiceTransform.position, 0.2f, 1, 1f);
+       Donut.transform.position=Player_ServiceTransform.position;
         Donut.transform.SetParent(Player_ServiceTransform); // Set the parent to Player_ServiceTransform
+        TakeOrder.Instance.SetDonutOrderProcess();
+      
     
-        }); 
+
+
     }
 
 
@@ -49,6 +54,7 @@ public class OrderPrepare : MonoBehaviour
     {        
         Donut.transform.SetParent(parentTransform); // Keep world position
         Donut.transform.localPosition = Vector3.zero;
+        Donut=null;
     }
    }
     

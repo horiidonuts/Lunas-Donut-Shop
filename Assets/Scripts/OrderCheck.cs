@@ -35,6 +35,8 @@ public class OrderCheck : MonoBehaviour
          if (PanelAnimHandler.Instance.PlayerSelectPrepared_Sauce == TakeOrder.Instance.CustomerWant_Sauce)
         {
             Debug.Log("Sipariş doğru");
+            //donutu oluştur
+            OrderPrepare.Instance.DonutOrder_prepare();
         }
         else
         {

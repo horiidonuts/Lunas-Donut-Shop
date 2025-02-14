@@ -97,7 +97,7 @@ public class PanelAnimHandler : MonoBehaviour
         player.GetComponent<TakeOrder>().playerHasOrder = false;
 
         OrderCheck.Instance.CheckOrder();
-        OrderPrepare.Instance.DonutOrder_prepare();
+        //OrderPrepare.Instance.DonutOrder_prepare();
         
 
         //donut instantiate olacak TakeOrder scripti içinde

@@ -12,6 +12,7 @@ TagManager:
   - service
   - table
   - zone
+  - pay_zone
   layers:
   - Default
   - TransparentFX
