@@ -30,7 +30,12 @@ public class Movement : MonoBehaviour
         wRightHash = Animator.StringToHash("wRight");    
     }
 
-    void Update()
+    // void Update()
+    // {
+    //     HandleMove();
+    // }
+
+    void FixedUpdate()
     {
         HandleMove();
     }
@@ -123,7 +128,6 @@ public class Movement : MonoBehaviour
             animator.SetBool(wRightHash,false);
         }
 
-        Debug.Log(direction);
 
     }
 
