@@ -4,8 +4,8 @@ using UnityEngine;
 public class TakeOrder : MonoBehaviour
 {
     public static TakeOrder Instance;
-    [SerializeField] bool canTakeOrder = false;
-    [SerializeField] public bool playerHasOrder = false;
+    [SerializeField] bool canTakeOrder = false; //order alabilir mi
+    [SerializeField] public bool playerHasOrder = false; //playerın orderı var mı yok mu
     public string CustomerWant_Sauce; //bunu return edecek bir metod yazılabilir.
     
     public bool DonutOrderProcess = false; //donut garsonun elindeyken true olacak 
@@ -32,11 +32,14 @@ public class TakeOrder : MonoBehaviour
             DisableSphere(); 
 
             var donutOrder=customer.GetComponent<DonutOrder>();
+            var customerMovement = customer.GetComponent<CustomerMovement>();
             if (donutOrder != null)
             {
                 DonutOrder.SauceType DonutSauce = donutOrder.sauce;
                 Debug.Log("Donut Order: " + DonutSauce);
                 CustomerWant_Sauce = DonutSauce.ToString();
+                customerMovement.hasOrdered = true; //sipariş verildi
+                
             }
       }
  }
@@ -47,13 +50,14 @@ public class TakeOrder : MonoBehaviour
         {
             customer = other.gameObject; 
             canTakeOrder = true;
-            if (DonutOrderProcess)
+            var customerMovement = customer.GetComponent<CustomerMovement>();
+
+            if (DonutOrderProcess&&customerMovement.hasOrdered) //donut siparişi verildiyse ve customerın içindeki hasordered true ise
             {
                 Transform serviceTransform=customer.transform.Find("Service_Zone");
                 Debug.Log("customera teslim edildi");
                 OrderPrepare.Instance.SetDonutParent(serviceTransform);
                 //customerın içindeki customermovementın içinde sayacı başlat ve kasaya gitsin
-                var customerMovement = customer.GetComponent<CustomerMovement>();
                 //customerMovement.DestroyDonut();
                 StartCoroutine(customerMovement.WaitAndMoveToPayZone()); 
                 DonutOrderProcess = false;

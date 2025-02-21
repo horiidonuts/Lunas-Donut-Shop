@@ -10,6 +10,7 @@ public class CustomerMovement : MonoBehaviour
     //public bool hasCompletedOrder=false;
    // public bool isAtCashRegister=false;
 
+   public bool hasOrdered=false; //sipariş verildi mi kontrolü
     public GameObject Pay_Zone;
     public GameObject Exit_Zone;
 

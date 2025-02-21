@@ -6,6 +6,7 @@ public class DonutOrder : MonoBehaviour
     private string PlayerSelectPrepared_Sauce;
     public enum SauceType { Chocolate, Strawberry, Vanilla }
     public SauceType sauce;
+    
 
 
     void Start()
