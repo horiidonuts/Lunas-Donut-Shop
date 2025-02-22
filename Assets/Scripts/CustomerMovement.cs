@@ -1,6 +1,6 @@
 using System.Collections;
 using UnityEngine;
-
+using UnityEngine.AI;
 public class CustomerMovement : MonoBehaviour
 {
     public Transform target; //hedef chair pozisyonu
