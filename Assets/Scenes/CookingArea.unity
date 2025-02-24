@@ -1630,7 +1630,6 @@ MonoBehaviour:
   buttons:
   - {fileID: 450731984}
   - {fileID: 343646040}
-  waitDuration: 0.4
   index: 0
   currentPhase: 0
 --- !u!114 &1345916310
@@ -1646,8 +1645,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveAmountX: 1.05
-  moveDuration: 0.4
-  _zoomTime: 0.35
+  moveDuration: 0.5
+  _zoomTime: 0.52
   mainCamera: {fileID: 476592808}
 --- !u!1001 &1357670185
 PrefabInstance:

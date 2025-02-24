@@ -28,7 +28,7 @@ public class CameraController : MonoBehaviour
     public void MoveCameraToRight()
     {
         Vector3 targetPos = new Vector3(mainCamera.transform.position.x + moveAmountX, mainCamera.transform.position.y, mainCamera.transform.position.z);
-        mainCamera.transform.DOMove(targetPos, moveDuration,false).OnComplete(
+        mainCamera.transform.DOMove(targetPos, moveDuration,false).SetEase(Ease.OutQuart).OnComplete(
          ()=>{
             targetPos=new Vector3(mainCamera.transform.position.x+moveAmountX,
             mainCamera.transform.position.y,
@@ -42,7 +42,7 @@ public class CameraController : MonoBehaviour
     public void MoveCameraToLeft()
     {
         Vector3 targetPos = new Vector3(mainCamera.transform.position.x - moveAmountX, mainCamera.transform.position.y, mainCamera.transform.position.z);
-        mainCamera.transform.DOMove(targetPos, moveDuration,false).OnComplete(
+        mainCamera.transform.DOMove(targetPos, moveDuration,false).SetEase(Ease.OutQuart).OnComplete(
             ()=>{
                 targetPos=new Vector3(mainCamera.transform.position.x-moveAmountX,
                 mainCamera.transform.position.y,
@@ -60,6 +60,16 @@ public class CameraController : MonoBehaviour
 
     public void DecreaseFOV()
     {
-        DOTween.To(() => _currentFov, x => _currentFov = x, 30, _zoomTime);
+        DOTween.To(() => mainCamera.fieldOfView, x => mainCamera.fieldOfView = x, 30, _zoomTime).SetEase(Ease.OutQuart);
+    }
+
+    public void IncreaseFov()
+    {
+        DOTween.To(() => mainCamera.fieldOfView, x => mainCamera.fieldOfView = x, 50, _zoomTime).SetEase(Ease.OutQuart);
+    }
+
+    public float GetMoveDuration()
+    {
+        return moveDuration;
     }
 }

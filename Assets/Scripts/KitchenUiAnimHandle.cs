@@ -10,7 +10,7 @@ using UnityEngine.UI;
 public class KitchenUiAnimHandle : MonoBehaviour
 {
     [SerializeField] private Button[] buttons;
-    [SerializeField] private float waitDuration;
+    private float _waitDuration;
     [SerializeField] private int index; 
     [SerializeField] private int currentPhase;
     
@@ -21,6 +21,7 @@ public class KitchenUiAnimHandle : MonoBehaviour
     {
         currentPhase = 1;
         _camController = GetComponent<CameraController>();
+        _waitDuration = _camController.GetMoveDuration();
     }
     
     public void OnButtonClick(Button button)
@@ -28,7 +29,8 @@ public class KitchenUiAnimHandle : MonoBehaviour
         Animator animator = button.GetComponent<Animator>();
         if (animator != null)
         {
-            Debug.Log("Button hit: " + button);
+            _waitDuration = _camController.GetMoveDuration();
+            //Debug.Log("Button hit: " + button);
             animator.SetTrigger(Clicked);
             DisableEnableButtons();
         }
@@ -44,6 +46,11 @@ public class KitchenUiAnimHandle : MonoBehaviour
         if (currentPhase == 2)
         {
             _camController.DecreaseFOV();
+        }
+
+        if (currentPhase != 2)
+        {
+            _camController.IncreaseFov();
         }
     }
 
@@ -63,7 +70,7 @@ public class KitchenUiAnimHandle : MonoBehaviour
     IEnumerator DEbuttons(Button button)
     {
         button.interactable = false;
-        yield return new WaitForSeconds(waitDuration);
+        yield return new WaitForSeconds(_waitDuration);
         button.interactable = true;
     }
 
