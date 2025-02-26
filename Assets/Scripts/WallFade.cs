@@ -14,30 +14,30 @@ public class WallFade : MonoBehaviour
     [SerializeField] float fadeSpeed = 0.2f;
     [SerializeField] public bool faded = false;
     [SerializeField] GameObject[] walls;
-    Dictionary<GameObject, Material> materials = new Dictionary<GameObject, Material>();
+    Dictionary<GameObject, Material> _materials = new Dictionary<GameObject, Material>();
     void Start()
     {
         foreach (GameObject wall in walls)
         {
             if (wall.TryGetComponent<Renderer>(out Renderer renderer))
             {
-                materials[wall] = renderer.material;
+                _materials[wall] = renderer.material;
             }
             
         }
 
-        if (materials.Count == 0)
+        if (_materials.Count == 0)
         {
-            originalColor=materials[walls[0]].color;
+            originalColor=_materials[walls[0]].color;
         }
         
-         fadeSpeed = 1f / fadeDuration;
+        fadeSpeed = 1f / fadeDuration;
     }
     
     void Update()
     {
 
-        foreach (var entry in materials)
+        foreach (var entry in _materials)
         {
             Material material = entry.Value;
             

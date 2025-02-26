@@ -8,10 +8,11 @@ using UnityEngine.Serialization;
 
 public class FlipDonut : MonoBehaviour
 {
-    Camera _mainCamera;
+    private Camera _mainCamera;
     private PlayerInput _playerInput;
     private InputAction _clickAction;
-    Animator _animator;
+    private Animator _animator;
+    private CookDonut _cookDonut;
     
     private void Awake()
     {
@@ -54,9 +55,7 @@ public class FlipDonut : MonoBehaviour
             
         if (Physics.Raycast(ray, out RaycastHit hit) 
             && hit.transform.CompareTag("Donut")
-            && !IsPointerOverUIObject()
-            /*!EventSystem.current.IsPointerOverGameObject()*/
-            )
+            && !IsPointerOverUIObject())
         {
             
             Debug.Log("Object hit: " + hit.transform.name);
@@ -74,6 +73,8 @@ public class FlipDonut : MonoBehaviour
         _animator.SetTrigger("Flip");
         yield return new WaitForSeconds(1f);
         _animator.ResetTrigger("Flip");
+        yield return new WaitForSeconds(1f);
+        _cookDonut.ChangeSides();
     }
     
     private bool IsPointerOverUIObject()
