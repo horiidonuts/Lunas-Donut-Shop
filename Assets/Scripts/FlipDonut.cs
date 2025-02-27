@@ -13,6 +13,7 @@ public class FlipDonut : MonoBehaviour
     private InputAction _clickAction;
     private Animator _animator;
     private CookDonut _cookDonut;
+    private static readonly int Flip = Animator.StringToHash("Flip");
     
     private void Awake()
     {
@@ -70,9 +71,9 @@ public class FlipDonut : MonoBehaviour
     
     private IEnumerator FlipTrigger()
     {
-        _animator.SetTrigger("Flip");
+        _animator.SetTrigger(Flip);
         yield return new WaitForSeconds(1f);
-        _animator.ResetTrigger("Flip");
+        _animator.ResetTrigger(Flip);
         yield return new WaitForSeconds(1f);
         _cookDonut.ChangeSides();
     }

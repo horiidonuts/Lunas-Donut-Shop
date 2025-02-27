@@ -15,6 +15,7 @@ public class KitchenUiAnimHandle : MonoBehaviour
     [SerializeField] private int currentPhase;
     
     private CameraController _camController;
+    private CookBubblePop _cookBubblePop;
     private static readonly int Clicked = Animator.StringToHash("Clicked");
     
     private void Start() 
@@ -22,6 +23,7 @@ public class KitchenUiAnimHandle : MonoBehaviour
         currentPhase = 1;
         _camController = GetComponent<CameraController>();
         _waitDuration = _camController.GetMoveDuration();
+        _cookBubblePop = GetComponent<CookBubblePop>();
     }
     
     public void OnButtonClick(Button button)
@@ -33,6 +35,7 @@ public class KitchenUiAnimHandle : MonoBehaviour
             //Debug.Log("Button hit: " + button);
             animator.SetTrigger(Clicked);
             DisableEnableButtons();
+            
         }
     }
 

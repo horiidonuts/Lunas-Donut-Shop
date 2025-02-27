@@ -26,7 +26,7 @@ public class UpdateMeter : MonoBehaviour
     
     private void FixedUpdate()
     {
-        _textMeshPro.text = ("Cooking: "  + (int) _cookDonut.GetCookingMeter());
+        _textMeshPro.text = ("Cooking... ["  + (int) _cookDonut.GetCookingMeter()+ "]");
         
     }
 }
