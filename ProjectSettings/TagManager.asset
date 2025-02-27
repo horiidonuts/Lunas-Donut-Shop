@@ -13,6 +13,8 @@ TagManager:
   - table
   - zone
   - pay_zone
+  - Donut
+  - CookingPan
   layers:
   - Default
   - TransparentFX

@@ -18,6 +18,7 @@ public class Movement : MonoBehaviour
 
     PlayerInput playerInput;
     InputAction moveAction;
+    [SerializeField] Collider capsuleCollider;
 
     void Start()
     {
@@ -29,11 +30,6 @@ public class Movement : MonoBehaviour
         wLeftHash = Animator.StringToHash("wLeft");
         wRightHash = Animator.StringToHash("wRight");    
     }
-
-    // void Update()
-    // {
-    //     HandleMove();
-    // }
 
     void FixedUpdate()
     {
@@ -137,5 +133,12 @@ public class Movement : MonoBehaviour
         bool wDown = animator.GetBool(wDownHash);
         bool wLeft = animator.GetBool(wLeftHash);
         bool wRight = animator.GetBool(wRightHash);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        Collider collider;
+        collider = other.GetComponent<Collider>();
+        Debug.Log("object hit: "+ collider);
     }
 }
