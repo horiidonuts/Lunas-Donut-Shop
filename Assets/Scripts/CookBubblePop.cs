@@ -38,7 +38,7 @@ public class CookBubblePop : MonoBehaviour
     {
         _rect.transform.DOScaleX(0.35f, _zoomDuration).SetEase(Ease.OutBack);
         _rect.transform.DOScaleY(0.35f, _zoomDuration).SetEase(Ease.OutBack);
-        _rect.transform.DOMove(new Vector3(1360, 860, 0), _zoomDuration).SetEase(Ease.OutBack);
+        _rect.transform.DOMove(new Vector3(1350, 830, 0), _zoomDuration).SetEase(Ease.OutBack);
         _isPanelOpen = true;
     }
     
@@ -46,7 +46,7 @@ public class CookBubblePop : MonoBehaviour
     public void CloseBubble()
     {
         _rect.transform.DOScale(new Vector3(0,0,0), _zoomDuration).SetEase(Ease.OutExpo);
-        _rect.transform.DOMove(new Vector3(0, 800, 0), _zoomDuration).SetEase(Ease.OutExpo);
+        _rect.transform.DOMove(new Vector3(0, 830, 0), _zoomDuration).SetEase(Ease.OutExpo);
         _isPanelOpen = false;
     }
 }
