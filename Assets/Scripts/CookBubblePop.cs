@@ -1,52 +1,59 @@
+using System;
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class CookBubblePop : MonoBehaviour
 {
     RectTransform _rect;
-    [SerializeField] private float _zoomDuration;
+    [SerializeField] private float zoomDuration;
     private bool _isPanelOpen = false;
     [SerializeField] private GameObject kuiObject;
     private KitchenUiAnimHandle _kuiAnimHandle;
-    
+    private Vector3 _firstScale; // Baloncugun ilk boyutunu tutan vektor
+    private Vector3 _firstPosition; // Baloncugun ilk konumunu tutan vektor
 
-    
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+
+    private void Awake()
     {
         _rect = GetComponent<RectTransform>();
-        _rect.transform.DOScale(new Vector3(0,0,0), 0f);
-        OpenBubble();
+        _rect.transform.DOScale(new Vector3(0,0,0), 0f); // Basta balonun boyutunu 0 yaptik bu sekilde isliyor animasyon.
         _kuiAnimHandle = kuiObject.GetComponent<KitchenUiAnimHandle>();
     }
-
-    // Update is called once per frame
+    
+    void Start()
+    {
+        
+        _firstScale = _rect.transform.localScale;
+        _firstPosition = _rect.transform.position;
+        OpenBubble();
+    }
+    
     void Update()
     {
-        if (!_isPanelOpen && _kuiAnimHandle.GetPhase() == 1)
+        if (!_isPanelOpen && _kuiAnimHandle.GetPhase() == 1) // Panel kapali ve faz 1 ise baloncugu ac
         {
             OpenBubble();
         }
 
-        if (_isPanelOpen && _kuiAnimHandle.GetPhase() != 1)
+        if (_isPanelOpen && _kuiAnimHandle.GetPhase() != 1) // Panel acik ve faz 1 degil ise baloncugu kapat
         {
             CloseBubble();
         }
     }
 
-    private void OpenBubble()
+    private void OpenBubble() // Baloncugu acan method
     {
-        _rect.transform.DOScaleX(0.35f, _zoomDuration).SetEase(Ease.OutBack);
-        _rect.transform.DOScaleY(0.35f, _zoomDuration).SetEase(Ease.OutBack);
-        _rect.transform.DOMove(new Vector3(1350, 830, 0), _zoomDuration).SetEase(Ease.OutBack);
+        _rect.transform.DOScale(_firstScale, zoomDuration).SetEase(Ease.OutBack);
+        _rect.transform.DOMove(_firstPosition, zoomDuration).SetEase(Ease.OutBack);
         _isPanelOpen = true;
     }
     
 
-    public void CloseBubble()
+    public void CloseBubble() // Baloncugu kapatan method
     {
-        _rect.transform.DOScale(new Vector3(0,0,0), _zoomDuration).SetEase(Ease.OutExpo);
-        _rect.transform.DOMove(new Vector3(0, 830, 0), _zoomDuration).SetEase(Ease.OutExpo);
+        _rect.transform.DOScale(new Vector3(0,0,0), zoomDuration).SetEase(Ease.OutExpo);
+        _rect.transform.DOMove(new Vector3(0, 850, 0), zoomDuration).SetEase(Ease.OutExpo);
         _isPanelOpen = false;
     }
 }

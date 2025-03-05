@@ -12,6 +12,7 @@ public class CameraController : MonoBehaviour
     private KitchenUiAnimHandle _kuiHandle;
     private int _currentPhase;
     private float _currentFov;
+    private bool _zoomedIn = false;
     
     void Start()
     {
@@ -58,18 +59,25 @@ public class CameraController : MonoBehaviour
         return mainCamera.transform.position;
     }
 
-    public void DecreaseFOV()
+    public void ZoomIn()
     {
         DOTween.To(() => mainCamera.fieldOfView, x => mainCamera.fieldOfView = x, 30, _zoomTime).SetEase(Ease.OutQuart);
+        _zoomedIn = true;
     }
 
-    public void IncreaseFov()
+    public void ZoomOut()
     {
         DOTween.To(() => mainCamera.fieldOfView, x => mainCamera.fieldOfView = x, 50, _zoomTime).SetEase(Ease.OutQuart);
+        _zoomedIn = false;
     }
 
     public float GetMoveDuration()
     {
         return moveDuration;
+    }
+
+    public bool GetZoomStatus()
+    {
+        return _zoomedIn;
     }
 }

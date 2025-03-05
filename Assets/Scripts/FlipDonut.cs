@@ -59,13 +59,8 @@ public class FlipDonut : MonoBehaviour
             && !IsPointerOverUIObject())
         {
             
-            Debug.Log("Object hit: " + hit.transform.name);
+            // Debug.Log("Object hit: " + hit.transform.name);
             StartCoroutine(FlipTrigger());
-        }
-
-        else
-        {
-            Debug.Log("Object hit: " + hit.transform.name);
         }
     }
     

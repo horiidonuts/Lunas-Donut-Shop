@@ -46,14 +46,14 @@ public class KitchenUiAnimHandle : MonoBehaviour
             DisableSingularButton(1);
         }
 
-        if (currentPhase == 2)
+        if (currentPhase == 2 && !_camController.GetZoomStatus())
         {
-            _camController.DecreaseFOV();
+            _camController.ZoomIn();
         }
 
-        if (currentPhase != 2)
+        if (currentPhase != 2 && _camController.GetZoomStatus())
         {
-            _camController.IncreaseFov();
+            _camController.ZoomOut();
         }
     }
 
