@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 398064225a4e3a345ac8e3c824aa7ba1
+guid: 75f0a4e2f8c292b4283dcaaeaad93121
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -37,8 +37,8 @@ TextureImporter:
     filterMode: 1
     aniso: 1
     mipBias: 0
-    wrapU: 1
-    wrapV: 1
+    wrapU: 0
+    wrapV: 0
     wrapW: 0
   nPOTScale: 0
   lightmap: 0
@@ -136,23 +136,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: meter_round_inner_0
+      name: stripe2 1_0
       rect:
         serializedVersion: 2
-        x: 65
-        y: 258
-        width: 952
-        height: 564
+        x: 0
+        y: 0
+        width: 1280
+        height: 1280
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1313c4b4d8000ed48aa838b7b4b832ad
-      internalID: 370897779
+      spriteID: 7a5e42e86e9c91642baa0bfbf1666e9a
+      internalID: -1797214640
       vertices: []
       indices: 
       edges: []
@@ -161,7 +161,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: fbd1ea55f83c1954981755b6104f80bc
+    spriteID: aa4e12527cbebbe4c94dbafa67ba7694
     internalID: 0
     vertices: []
     indices: 
@@ -171,7 +171,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      meter_round_inner_0: 370897779
+      stripe2 1_0: -1797214640
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

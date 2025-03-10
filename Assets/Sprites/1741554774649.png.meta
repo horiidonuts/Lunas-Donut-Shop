@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 15f65f870ccf8684b8c8311f6e9960c2
+guid: 7323dcec760110f4b88a1c3a80ea68b8
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -136,13 +136,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: meter_round_0
+      name: 1741554774649_0
       rect:
         serializedVersion: 2
-        x: 65
-        y: 258
-        width: 952
-        height: 564
+        x: 5
+        y: 12
+        width: 710
+        height: 557
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -151,8 +151,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1afb1bd8479313f4899a9b7e0250df51
-      internalID: 2141049305
+      spriteID: 02fc85d1f53587643b421ff8977abbdb
+      internalID: 1024951481
       vertices: []
       indices: 
       edges: []
@@ -161,7 +161,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: e6e826350919c1f4a87b7759f122e279
+    spriteID: fb72518ab0bd0af45916931fe3e4911d
     internalID: 0
     vertices: []
     indices: 
@@ -171,7 +171,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      meter_round_0: 2141049305
+      1741554774649_0: 1024951481
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
