@@ -38,7 +38,7 @@ public class CustomerMovement : MonoBehaviour
     {
 
         // Pozisyonları belirli bir tolerans değeri ile karşılaştır
-        if (Vector3.Distance(transform.position, target.position) < 0.07f && DeskStateControl.Chairs.Count > 0)
+        if (Vector3.Distance(transform.position, target.position) < 0.1f && DeskStateControl.Chairs.Count > 0)
         {
             Debug.Log("Hedefe ulaşıldı");
 
@@ -52,24 +52,15 @@ public class CustomerMovement : MonoBehaviour
         }
     }
 
-    public void moveCustomer()
-    {
-        while (target != null && !hasReachedTarget)
+    public void moveCustomer(){
+        if (Vector3.Distance(transform.position, target.position) >= 0.1f) // Eğer müşteri ve hedef arasındaki mesafe 0.1f'den büyükse
         {
-            StartCoroutine(MoveAgentForShortTime());
+            agent.SetDestination(target.position); // Müşteriyi hedefe doğru hareket ettir
         }
-    }
-
-    private IEnumerator MoveAgentForShortTime()
-    {
-        agent.isStopped = false; // NavMeshAgent'ı başlat
-        agent.SetDestination(target.position); // Hedefe doğru hareket et
-
-        yield return new WaitForSeconds(0.1f); // 0.1 saniye bekle
-
-        agent.isStopped = true; // NavMeshAgent'ı durdur
-
-        CheckCustomerTransform(); // Müşterinin hedefe ulaşıp ulaşmadığını kontrol et
+        else
+        {
+            CheckCustomerTransform(); // Müşterinin hedefe ulaşıp ulaşmadığını kontrol et
+        }
     }
 
     public void SetRandomTarget()
