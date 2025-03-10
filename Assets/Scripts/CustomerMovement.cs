@@ -1,12 +1,15 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
+
+
 public class CustomerMovement : MonoBehaviour
 {
     public Transform target; //hedef chair pozisyonu
     public float speed; //customer hareket hızı
     private bool hasReachedTarget = false; //hedefe ulaşıldı mı kontrolü
     public GameObject orderSphere;
+    NavMeshAgent agent;
     //public bool hasCompletedOrder=false;
    // public bool isAtCashRegister=false;
 
@@ -19,11 +22,11 @@ public class CustomerMovement : MonoBehaviour
 
     void Start()
     {
-        speed = 1f; // Hızı belirle
+      speed = 1f; // Hızı belirle
       SetRandomTarget(); // Rastgele bir hedef belirleme metodunu çağır
       Pay_Zone=GameObject.Find("Pay_Zone");
       Exit_Zone=GameObject.Find("Exit_Zone");
-
+      agent = GetComponent<NavMeshAgent>();
     }
 
     void Update()
@@ -35,8 +38,9 @@ public class CustomerMovement : MonoBehaviour
     {
 
         // Pozisyonları belirli bir tolerans değeri ile karşılaştır
-        if (Vector3.Distance(transform.position, target.position) < 0.01f && DeskStateControl.Chairs.Count > 0)
+        if (Vector3.Distance(transform.position, target.position) < 0.07f && DeskStateControl.Chairs.Count > 0)
         {
+            Debug.Log("Hedefe ulaşıldı");
 
             DeskStateControl.RemoveAtList(); // Müşterinin oturduğu koltuğu listeden çıkar
             hasReachedTarget = true; // Hedefe ulaşıldığını işaretle
@@ -49,16 +53,24 @@ public class CustomerMovement : MonoBehaviour
     }
 
     public void moveCustomer()
-    {  
-
-       if (target != null && !hasReachedTarget) 
+    {
+        while (target != null && !hasReachedTarget)
         {
-            transform.position = Vector3.MoveTowards(transform.position, target.position, speed * Time.deltaTime); 
-            CheckCustomerTransform();
+            StartCoroutine(MoveAgentForShortTime());
         }
-
     }
 
+    private IEnumerator MoveAgentForShortTime()
+    {
+        agent.isStopped = false; // NavMeshAgent'ı başlat
+        agent.SetDestination(target.position); // Hedefe doğru hareket et
+
+        yield return new WaitForSeconds(0.1f); // 0.1 saniye bekle
+
+        agent.isStopped = true; // NavMeshAgent'ı durdur
+
+        CheckCustomerTransform(); // Müşterinin hedefe ulaşıp ulaşmadığını kontrol et
+    }
 
     public void SetRandomTarget()
     {

@@ -122,6 +122,7 @@ GameObject:
   - component: {fileID: 5604945953709256558}
   - component: {fileID: 3409103996634354905}
   - component: {fileID: 3078992885231205772}
+  - component: {fileID: 9220774526967007064}
   m_Layer: 0
   m_Name: Customer1
   m_TagString: customer
@@ -237,6 +238,9 @@ MonoBehaviour:
   target: {fileID: 0}
   speed: 0
   orderSphere: {fileID: 597373909265431326}
+  hasOrdered: 0
+  Pay_Zone: {fileID: 0}
+  Exit_Zone: {fileID: 0}
 --- !u!114 &3078992885231205772
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -250,6 +254,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sauce: 0
+--- !u!195 &9220774526967007064
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3767437215393595815}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 1
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!1 &6099391650347913598
 GameObject:
   m_ObjectHideFlags: 0
