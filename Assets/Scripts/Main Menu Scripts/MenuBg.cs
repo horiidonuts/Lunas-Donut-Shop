@@ -8,6 +8,7 @@ public class MenuBg : MonoBehaviour
     private float _width;
     [SerializeField] private float endWidth;
     [SerializeField] private float duration;
+    [SerializeField] Ease easing;
     
     private RawImage _image;
     void Start()
@@ -23,6 +24,6 @@ public class MenuBg : MonoBehaviour
 
     public void SlideImage()
     {
-        DOTween.To(() => _width, x => _width = x,endWidth , duration).SetEase(Ease.OutQuad);
+        DOTween.To(() => _width, x => _width = x,endWidth , duration).SetEase(easing);
     }
 }

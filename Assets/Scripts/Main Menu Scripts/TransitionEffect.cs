@@ -14,6 +14,9 @@ public class TransitionEffect : MonoBehaviour
     [SerializeField] private Vector2 endWidth;
     [SerializeField] private float duration;
     [SerializeField] private float waitTime;
+    [SerializeField] private int sceneIndex;
+
+    
     //[SerializeField] private float loadSceneDelay;
     
     private RectTransform _rectTransform;
@@ -38,11 +41,13 @@ public class TransitionEffect : MonoBehaviour
     {
         yield return new WaitForSeconds(waitTime);
         DOTween.To(() => startWidth, x => startWidth = x,
-            endWidth, duration).SetEase(Ease.OutQuad).OnComplete(ChangeScene);
+            endWidth, duration).SetEase(Ease.OutQuad);
+        yield return new WaitForSeconds(duration);
+        ChangeScene(sceneIndex);
     }
 
-    private void ChangeScene()
+    private void ChangeScene(int index)
     {
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(index);
     }
 }

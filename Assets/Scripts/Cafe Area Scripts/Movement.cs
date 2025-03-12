@@ -135,10 +135,10 @@ public class Movement : MonoBehaviour
         bool wRight = animator.GetBool(wRightHash);
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        Collider collider;
-        collider = other.GetComponent<Collider>();
-        Debug.Log("object hit: "+ collider);
-    }
+    // private void OnTriggerEnter(Collider other)
+    // {
+    //     Collider collider;
+    //     collider = other.GetComponent<Collider>();
+    //     Debug.Log("object hit: "+ collider);
+    // }
 }
