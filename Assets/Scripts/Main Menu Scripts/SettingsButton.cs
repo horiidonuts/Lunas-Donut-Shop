@@ -22,9 +22,12 @@ public class SettingsButton : MonoBehaviour
     
     void Start()
     {
-        backButton.transform.localPosition = new Vector3(backButton.transform.localPosition.x - backButtonMoveX,
-            backButton.transform.localPosition.y,
-            backButton.transform.localPosition.z);
+        if (moveBack)
+        {
+            backButton.transform.localPosition = new Vector3(backButton.transform.localPosition.x - backButtonMoveX,
+                backButton.transform.localPosition.y,
+                backButton.transform.localPosition.z);   
+        }
     }
 
     void Update()
@@ -74,7 +77,7 @@ public class SettingsButton : MonoBehaviour
                 button.transform.DOMove(
                     new Vector3(button.transform.position.x + moveX, button.transform.position.y,
                         backButton.transform.localPosition.z),
-                    moveDuration).SetEase(easingIn);
+                    moveDuration).SetEase(easingOut);
                 yield return new WaitForSeconds(moveDelay);
             
             }

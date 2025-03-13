@@ -1,22 +1,33 @@
+using System;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.Serialization;
+using UnityEngine.UI;
 
 public class SettingsBackButton : MonoBehaviour
 {
-    private SettingsButton _settingsButton;
+    private MenuBg _menuBg;
+    [SerializeField] private RawImage backgroundImage;
     
-    void Start()
-    {
-        _settingsButton = gameObject.GetComponent<SettingsButton>();
-    }
 
-    void Update()
+    private void Start()
     {
-        
-    }
+        if (backgroundImage == null)
+        {
+            Debug.LogError("BG Image is not assigned in the Inspector!");
+            return;
+        }
 
-    public void GoBack()
+        _menuBg = backgroundImage.GetComponent<MenuBg>();
+
+        if (_menuBg == null)
+        {
+            Debug.LogError("BG Image component is missing from the Settings Button!");
+        }
+    }
+    
+    public void ResetBackground()
     {
-        _settingsButton.MoveMenuButtons();
+        _menuBg.SlideBackFromSettings();
     }
 }

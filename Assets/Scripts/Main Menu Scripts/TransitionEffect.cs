@@ -12,6 +12,8 @@ public class TransitionEffect : MonoBehaviour
 {
     [SerializeField] private Vector2 startWidth;
     [SerializeField] private Vector2 endWidth;
+    [SerializeField] private Vector2 endSettingsWidth;
+    
     [SerializeField] private float duration;
     [SerializeField] private float waitTime;
     [SerializeField] private int sceneIndex;
@@ -36,7 +38,7 @@ public class TransitionEffect : MonoBehaviour
     {
         StartCoroutine(SlideImage());
     }
-
+    
     private IEnumerator SlideImage()
     {
         yield return new WaitForSeconds(waitTime);
