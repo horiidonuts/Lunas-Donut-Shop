@@ -6,9 +6,8 @@ using UnityEngine.UI;
 
 public class SettingsBackButton : MonoBehaviour
 {
-    private MenuBg _menuBg;
     [SerializeField] private RawImage backgroundImage;
-    
+    private MenuBg _menuBg;
 
     private void Start()
     {
@@ -25,7 +24,7 @@ public class SettingsBackButton : MonoBehaviour
             Debug.LogError("BG Image component is missing from the Settings Button!");
         }
     }
-    
+
     public void ResetBackground()
     {
         _menuBg.SlideBackFromSettings();
