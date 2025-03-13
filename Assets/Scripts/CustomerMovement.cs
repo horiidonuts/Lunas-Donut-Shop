@@ -48,7 +48,7 @@ public class CustomerMovement : MonoBehaviour
             //burada Spawncustomer metodunu çağırarak yeni bir customer oluşturabilirsiniz
             CustomerSpawn.Instance.SpawnCustomer(); // Yeni bir müşteri oluştur
 
-            target=null;
+            // target=null;
         }
     }
 
