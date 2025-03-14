@@ -1,10 +1,12 @@
 using System;
 using System.Collections;
 using DG.Tweening;
+using Unity.VisualScripting;
 using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
+using UnityEngine.UI;
 
 public class TransitionEffect : MonoBehaviour
 {
@@ -14,16 +16,13 @@ public class TransitionEffect : MonoBehaviour
 
     [SerializeField] private float duration;
     [SerializeField] private float waitTime;
-    //[SerializeField] private int sceneIndex;
-
-
-    //[SerializeField] private float loadSceneDelay;
     private Vector2 _defaultWidth;
     private RectTransform _rectTransform;
-    //private SceneManager _sceneManager;
 
+    private RawImage _image;
+    private Color _color;
     public static TransitionEffect Instance;
-    
+
     private void Awake()
     {
         if (Instance == null)
@@ -35,14 +34,16 @@ public class TransitionEffect : MonoBehaviour
     void Start()
     {
         _defaultWidth = startWidth;
-        //_sceneManager = GameObject.Find("SceneManager").GetComponent<SceneManager>();
+        _image = GetComponent<RawImage>();
         _rectTransform = GetComponent<RectTransform>();
         _rectTransform.sizeDelta = startWidth;
+        _color = _image.color;
     }
 
     void FixedUpdate()
     {
         _rectTransform.sizeDelta = startWidth;
+        _image.color = _color;
     }
 
     public float GetDuration()
@@ -54,6 +55,7 @@ public class TransitionEffect : MonoBehaviour
     {
         return waitTime;
     }
+
     public void TransitionIn()
     {
         StartCoroutine(SlideImage());
@@ -73,5 +75,17 @@ public class TransitionEffect : MonoBehaviour
     {
         DOTween.To(() => startWidth, x => startWidth = x,
             _defaultWidth, 0f);
+    }
+
+    public void ChangeColorToBlack()
+    {
+        StartCoroutine(ColorToBlack());
+    }
+
+    public IEnumerator ColorToBlack()
+    {
+        Color black = new Color(0, 0, 0, 1);
+        DOTween.To( () => _color, x => _color = x, black, duration).SetEase(Ease.Linear);
+        yield return null;
     }
 }

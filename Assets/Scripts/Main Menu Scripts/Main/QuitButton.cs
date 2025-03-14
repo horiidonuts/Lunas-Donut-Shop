@@ -23,7 +23,10 @@ public class QuitButton : MonoBehaviour
     {
         Debug.LogWarning("Quitting Game");
         TransitionEffect.Instance.TransitionIn();
-        yield return new WaitForSeconds(TransitionEffect.Instance.GetDuration());
+        TransitionEffect.Instance.ChangeColorToBlack();
+        yield return new WaitForSeconds(
+            TransitionEffect.Instance.GetDuration()
+            + TransitionEffect.Instance.GetWaitTime());
         Application.Quit();
     }
 }
