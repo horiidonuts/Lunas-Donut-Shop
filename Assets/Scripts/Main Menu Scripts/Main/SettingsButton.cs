@@ -1,7 +1,11 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+using UnityEditor;
+using UnityEditor.Localization.Plugins.XLIFF.V12;
+using UnityEngine.Serialization;
 
 public class SettingsButton : MonoBehaviour
 {
@@ -20,11 +24,14 @@ public class SettingsButton : MonoBehaviour
     [Header("Back Button Values")] [SerializeField]
     private float backButtonMoveX;
 
-    [Header("AnimHandler GameObject")] 
-    [SerializeField] private GameObject animHandler;
+    [Header("AnimHandler GameObject")] [SerializeField]
+    private GameObject animHandler;
+
     private MoveSettingItems _settingItems;
 
-    
+    [Header("Settings Menu")] 
+    [SerializeField] private GameObject settingsMenu;
+
     void Start()
     {
         _settingItems = animHandler.GetComponent<MoveSettingItems>();
@@ -39,6 +46,8 @@ public class SettingsButton : MonoBehaviour
     {
         if (!goingToClose) // Ayarlar bolmesi acildi
         {
+            settingsMenu.SetActive(true); // Hiyerarside setactive'i aktif yap
+            
             foreach (Button button in buttons) // Tum butonlari sola kaydir 
             {
                 button.transform.DOMove(
@@ -65,7 +74,8 @@ public class SettingsButton : MonoBehaviour
                     moveDuration).SetEase(easingOut);
                 yield return new WaitForSeconds(moveDelay);
             }
-            
+
+            settingsMenu.SetActive(false); // Setactive deaktive et
             Debug.Log("Settings Close");
         }
     }

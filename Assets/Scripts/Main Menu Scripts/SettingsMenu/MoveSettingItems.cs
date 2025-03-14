@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using DG.Tweening;
@@ -9,11 +10,9 @@ public class MoveSettingItems : MonoBehaviour
     [SerializeField] private GameObject panel;
     [SerializeField] private Ease easeIn;
     [SerializeField] private Ease easeOut;
-
     [SerializeField] private float moveAmount;
     [SerializeField] private float moveDuration;
-
-
+    
     void Start()
     {
         // Basta ayarlar bolmesindeki her itemi gizler 
