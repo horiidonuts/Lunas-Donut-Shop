@@ -176,9 +176,17 @@ PrefabInstance:
       value: CookingPan
       objectReference: {fileID: 0}
     - target: {fileID: 7202271454713460447, guid: 439ec725bfd45684c8b55248b6293895, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7202271454713460447, guid: 439ec725bfd45684c8b55248b6293895, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: fce74deef2a79dd4e985ec98aca354a8, type: 2}
+    - target: {fileID: 7202271454713460447, guid: 439ec725bfd45684c8b55248b6293895, type: 3}
+      propertyPath: 'm_Materials.Array.data[1]'
+      value: 
+      objectReference: {fileID: 2100000, guid: c1d8339f0b8c8ed46a8eca7bb4cb13a8, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -912,9 +920,17 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: -9127561607767440349, guid: 556de9052c51eff41b4f0dfa6aa253ef, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -9127561607767440349, guid: 556de9052c51eff41b4f0dfa6aa253ef, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 702050ad3c904ad4bbed056669970675, type: 2}
+      objectReference: {fileID: 2100000, guid: c1d8339f0b8c8ed46a8eca7bb4cb13a8, type: 2}
+    - target: {fileID: -9127561607767440349, guid: 556de9052c51eff41b4f0dfa6aa253ef, type: 3}
+      propertyPath: 'm_Materials.Array.data[1]'
+      value: 
+      objectReference: {fileID: 2100000, guid: c1d8339f0b8c8ed46a8eca7bb4cb13a8, type: 2}
     - target: {fileID: -8679921383154817045, guid: 556de9052c51eff41b4f0dfa6aa253ef, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.7506555
@@ -976,9 +992,17 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8521902485874960664, guid: 556de9052c51eff41b4f0dfa6aa253ef, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8521902485874960664, guid: 556de9052c51eff41b4f0dfa6aa253ef, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 702050ad3c904ad4bbed056669970675, type: 2}
+    - target: {fileID: 8521902485874960664, guid: 556de9052c51eff41b4f0dfa6aa253ef, type: 3}
+      propertyPath: 'm_Materials.Array.data[1]'
+      value: 
+      objectReference: {fileID: 2100000, guid: c1d8339f0b8c8ed46a8eca7bb4cb13a8, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -1174,7 +1198,8 @@ MonoBehaviour:
   donutUpper: {fileID: 417478625}
   cookingMeter: 0
   maxCookingAmount: 150
-  cookingTime: 20
+  cookingTime: 7.5
+  resetDuration: 0.5
 --- !u!4 &417478634 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 556de9052c51eff41b4f0dfa6aa253ef, type: 3}
@@ -1671,6 +1696,7 @@ MeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: e0613f2e645af3645bf7565b8487176e, type: 2}
+  - {fileID: 2100000, guid: c1d8339f0b8c8ed46a8eca7bb4cb13a8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2901,7 +2927,8 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 3950226050908cf4896f1af466170bb1, type: 2}
+  - {fileID: -3846018093981099296, guid: 29454f2db8efe4d40b7e9d274ce97a16, type: 3}
+  - {fileID: 2100000, guid: c1d8339f0b8c8ed46a8eca7bb4cb13a8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
