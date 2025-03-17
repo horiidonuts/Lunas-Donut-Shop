@@ -1,5 +1,7 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.AI;
+
 
 public class CustomerMovement : MonoBehaviour
 {
@@ -7,22 +9,21 @@ public class CustomerMovement : MonoBehaviour
     public float speed; //customer hareket hızı
     private bool hasReachedTarget = false; //hedefe ulaşıldı mı kontrolü
     public GameObject orderSphere;
+    NavMeshAgent agent;
     //public bool hasCompletedOrder=false;
    // public bool isAtCashRegister=false;
 
+   public bool hasOrdered=false; //sipariş verildi mi kontrolü
     public GameObject Pay_Zone;
     public GameObject Exit_Zone;
 
-
-
-
     void Start()
     {
-        speed = 1f; // Hızı belirle
+      speed = 1f; // Hızı belirle
       SetRandomTarget(); // Rastgele bir hedef belirleme metodunu çağır
       Pay_Zone=GameObject.Find("Pay_Zone");
       Exit_Zone=GameObject.Find("Exit_Zone");
-
+      agent = GetComponent<NavMeshAgent>();
     }
 
     void Update()
@@ -34,8 +35,9 @@ public class CustomerMovement : MonoBehaviour
     {
 
         // Pozisyonları belirli bir tolerans değeri ile karşılaştır
-        if (Vector3.Distance(transform.position, target.position) < 0.01f && DeskStateControl.Chairs.Count > 0)
+        if (Vector3.Distance(transform.position, target.position) < 0.1f && DeskStateControl.Chairs.Count > 0)
         {
+            Debug.Log("Hedefe ulaşıldı");
 
             DeskStateControl.RemoveAtList(); // Müşterinin oturduğu koltuğu listeden çıkar
             hasReachedTarget = true; // Hedefe ulaşıldığını işaretle
@@ -43,21 +45,20 @@ public class CustomerMovement : MonoBehaviour
             //burada Spawncustomer metodunu çağırarak yeni bir customer oluşturabilirsiniz
             CustomerSpawn.Instance.SpawnCustomer(); // Yeni bir müşteri oluştur
 
-            target=null;
+            // target=null;
         }
     }
 
-    public void moveCustomer()
-    {  
-
-       if (target != null && !hasReachedTarget) 
+    public void moveCustomer(){
+        if (Vector3.Distance(transform.position, target.position) >= 0.1f) // Eğer müşteri ve hedef arasındaki mesafe 0.1f'den büyükse
         {
-            transform.position = Vector3.MoveTowards(transform.position, target.position, speed * Time.deltaTime); 
-            CheckCustomerTransform();
+            agent.SetDestination(target.position); // Müşteriyi hedefe doğru hareket ettir
         }
-
+        else
+        {
+            CheckCustomerTransform(); // Müşterinin hedefe ulaşıp ulaşmadığını kontrol et
+        }
     }
-
 
     public void SetRandomTarget()
     {
@@ -138,33 +139,4 @@ public class CustomerMovement : MonoBehaviour
          }
 
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
  }
-
-
- 
-
-
-
-
-
-
-    
-
-
