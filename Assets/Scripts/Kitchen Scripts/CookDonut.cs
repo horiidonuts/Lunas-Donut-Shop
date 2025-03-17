@@ -50,7 +50,7 @@ public class CookDonut : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(cookingMeter);
+        //Debug.Log(cookingMeter);
         if (_cookingUpper)
         {
             // Cook upper side of the donut
@@ -84,18 +84,18 @@ public class CookDonut : MonoBehaviour
             150, cookingTime).SetEase(Ease.Linear).SetId("CookingMeter");
         _currentlyCooking = true;
     }
+    
+    public void ResetCookingMeter()
+    {
+        DOTween.Kill("CookingMeter");
+        DOTween.To(() => cookingMeter, x => cookingMeter = x,
+            0f, resetDuration).SetEase(Ease.OutQuint).OnComplete(IncreaseCookingMeter);
+    }
 
     public void ChangeSides()
     {
         _cookingUpper = !_cookingUpper;
         _cookingLower = !_cookingLower;
-    }
-
-    public void ResetCookingMeter()
-    {
-        DOTween.Kill("CookingMeter");
-        DOTween.To(() => cookingMeter, x => cookingMeter = x,
-            0f, resetDuration).SetEase(Ease.OutQuad).OnComplete(IncreaseCookingMeter);
     }
 
     public float GetCookingMeter()
