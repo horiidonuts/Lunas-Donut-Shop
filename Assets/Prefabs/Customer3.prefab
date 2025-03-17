@@ -269,6 +269,7 @@ MonoBehaviour:
   target: {fileID: 0}
   speed: 0
   orderSphere: {fileID: 1720471375856835374}
+  hasOrdered: 0
   Pay_Zone: {fileID: 0}
   Exit_Zone: {fileID: 0}
 --- !u!114 &1920736123844173946
@@ -300,7 +301,7 @@ NavMeshAgent:
   m_AngularSpeed: 120
   m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 1
+  m_AutoBraking: 0
   m_AutoRepath: 1
   m_Height: 1.9999999
   m_BaseOffset: 0.99999994
