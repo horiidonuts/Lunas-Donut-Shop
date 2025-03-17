@@ -8,40 +8,54 @@ public class CookDonut : MonoBehaviour
     [SerializeField] private GameObject donutLower;
     [SerializeField] private GameObject donutUpper;
     [SerializeField] private float cookingMeter;
+
     [SerializeField] private int maxCookingAmount;
+
     // [SerializeField] private float cookingIncrement;
     [SerializeField] private float cookingTime;
+    [SerializeField] private float resetDuration;
     
+
     private float _elapsedUnResetTime;
     private float _cookingMeterSlider;
-    
-    
+
+
     private Material _lowerMaterial;
     private Material _upperMaterial;
     private bool _cookingUpper = false;
     private bool _cookingLower = false;
     private bool _currentlyCooking = false;
- 
-    
-    
-    
+
+    public static CookDonut instance;
+
+
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+    }
+
+
     void Start()
     {
         cookingMeter = 0;
         _cookingMeterSlider = cookingMeter;
         _lowerMaterial = donutLower.GetComponent<Material>();
         _upperMaterial = donutUpper.GetComponent<Material>();
-        
+
         cookingMeter = Mathf.Clamp(cookingMeter, 0, maxCookingAmount);
     }
 
     void Update()
     {
+        Debug.Log(cookingMeter);
         if (_cookingUpper)
         {
             // Cook upper side of the donut
         }
-        
+
         if (_cookingLower)
         {
             // Cook lower side of the donut
@@ -54,7 +68,6 @@ public class CookDonut : MonoBehaviour
         {
             IncreaseCookingMeter();
         }
-        
     }
 
     private void OnTriggerEnter(Collider other)
@@ -67,7 +80,8 @@ public class CookDonut : MonoBehaviour
 
     private void IncreaseCookingMeter()
     {
-        DOTween.To(() => cookingMeter, x => cookingMeter = x, 150, cookingTime).SetEase(Ease.Linear);
+        DOTween.To(() => cookingMeter, x => cookingMeter = x,
+            150, cookingTime).SetEase(Ease.Linear).SetId("CookingMeter");
         _currentlyCooking = true;
     }
 
@@ -75,6 +89,13 @@ public class CookDonut : MonoBehaviour
     {
         _cookingUpper = !_cookingUpper;
         _cookingLower = !_cookingLower;
+    }
+
+    public void ResetCookingMeter()
+    {
+        DOTween.Kill("CookingMeter");
+        DOTween.To(() => cookingMeter, x => cookingMeter = x,
+            0f, resetDuration).SetEase(Ease.OutQuad).OnComplete(IncreaseCookingMeter);
     }
 
     public float GetCookingMeter()

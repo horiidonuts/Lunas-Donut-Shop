@@ -18,18 +18,18 @@ public class UpdateMeter : MonoBehaviour
     [SerializeField] private int maxMagnitude;
     
     private TextMeshProUGUI _textMeshPro;
-    private CookDonut _cookDonut;
+    //private CookDonut _cookDonut;
     private RectTransform _rect;
     private bool _called = false;
     private Vector3 _defaultPosition;
     
     void Start()
     {
-        _cookDonut = GetComponentInParent<CookDonut>();
-        if (_cookDonut == null)
-        {
-            Debug.LogError("CookDonut component not found!");
-        }
+        //_cookDonut = GetComponentInParent<CookDonut>();
+        // if (_cookDonut == null)
+        // {
+        //     Debug.LogError("CookDonut component not found!");
+        // }
 
         _textMeshPro = GetComponent<TextMeshProUGUI>();
         if (_textMeshPro == null)
@@ -48,14 +48,14 @@ public class UpdateMeter : MonoBehaviour
     
     private void FixedUpdate()
     {
-        _textMeshPro.text = ("Cooking... ["  + (int) _cookDonut.GetCookingMeter()+ "]");
+        _textMeshPro.text = ("Cooking... ["  + (int) CookDonut.instance.GetCookingMeter()+ "]");
         
-        if (!_called && _cookDonut.GetCookingMeter() >= 100 )
+        if (!_called && CookDonut.instance.GetCookingMeter() >= 100 )
         {
             TweenMagnitude();
         }
         
-        if (_cookDonut.GetCookingMeter() >= 110 && magnitude % 2 == 0 && magnitude != 30) // Metre > ise, magnitude her 2 arttiginda ve magnitude < 30 ise
+        if (CookDonut.instance.GetCookingMeter() >= 110 && magnitude % 2 == 0 && magnitude != 30) // Metre > ise, magnitude her 2 arttiginda ve magnitude < 30 ise
         {   
             ResetPosition(); // Pozisyonu resetle/ortala
             ShakeOnOvercook(); // Texti sallandir
@@ -78,7 +78,7 @@ public class UpdateMeter : MonoBehaviour
     private void TweenMagnitude()
     {
         DOTween.To(() => magnitude, x => magnitude = x, maxMagnitude, 
-            _cookDonut.GetCookingTime()*0.25f).SetEase(Ease.Linear);
+            CookDonut.instance.GetCookingTime()*0.25f).SetEase(Ease.Linear);
         _called = true;
     }
 

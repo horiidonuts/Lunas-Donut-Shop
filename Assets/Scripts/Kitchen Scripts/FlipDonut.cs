@@ -12,7 +12,7 @@ public class FlipDonut : MonoBehaviour
     private PlayerInput _playerInput;
     private InputAction _clickAction;
     private Animator _animator;
-    private CookDonut _cookDonut;
+    //private CookDonut _cookDonut;
     private static readonly int Flip = Animator.StringToHash("Flip");
     
     private void Awake()
@@ -61,6 +61,7 @@ public class FlipDonut : MonoBehaviour
             
             // Debug.Log("Object hit: " + hit.transform.name);
             StartCoroutine(FlipTrigger());
+             CookDonut.instance.ResetCookingMeter();
         }
     }
     
@@ -70,7 +71,7 @@ public class FlipDonut : MonoBehaviour
         yield return new WaitForSeconds(1f);
         _animator.ResetTrigger(Flip);
         yield return new WaitForSeconds(1f);
-        _cookDonut.ChangeSides();
+        CookDonut.instance.ChangeSides();
     }
     
     private bool IsPointerOverUIObject()
