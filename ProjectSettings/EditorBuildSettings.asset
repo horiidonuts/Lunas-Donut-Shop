@@ -4,7 +4,17 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/Main Menu.unity
+    guid: 8c0d359ddeb05ac44b406bd894c6a9cf
+  - enabled: 1
+    path: Assets/Scenes/CafeArea.unity
+    guid: 9fc0d4010bbf28b4594072e72b8655ab
+  - enabled: 1
+    path: Assets/Scenes/CookingArea.unity
+    guid: 8733e7482eede774aa476eb4756c9a5e
   m_configObjects:
+    com.unity.addressableassets: {fileID: 11400000, guid: 5159d5d27805c4e498cf7dbf69d92a02, type: 2}
     com.unity.input.settings: {fileID: 11400000, guid: 2072e8cc4ca33fb498b3d2052a8a33f7, type: 2}
   m_UseUCBPForAssetBundles: 0
