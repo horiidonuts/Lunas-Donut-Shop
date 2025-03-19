@@ -10,8 +10,7 @@ public class CookDonut : MonoBehaviour
     [SerializeField] private float cookingMeter;
 
     [SerializeField] private int maxCookingAmount;
-
-    // [SerializeField] private float cookingIncrement;
+    
     [SerializeField] private float cookingTime;
     [SerializeField] private float resetDuration;
     
@@ -26,14 +25,14 @@ public class CookDonut : MonoBehaviour
     private bool _cookingLower = false;
     private bool _currentlyCooking = false;
 
-    public static CookDonut instance;
+    public static CookDonut Instance;
 
 
     private void Awake()
     {
-        if (instance == null)
+        if (Instance == null)
         {
-            instance = this;
+            Instance = this;
         }
     }
 

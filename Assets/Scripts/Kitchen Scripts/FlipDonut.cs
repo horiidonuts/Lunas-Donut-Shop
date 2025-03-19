@@ -61,7 +61,7 @@ public class FlipDonut : MonoBehaviour
             
             // Debug.Log("Object hit: " + hit.transform.name);
             StartCoroutine(FlipTrigger());
-             CookDonut.instance.ResetCookingMeter();
+             CookDonut.Instance.ResetCookingMeter();
         }
     }
     
@@ -71,7 +71,7 @@ public class FlipDonut : MonoBehaviour
         yield return new WaitForSeconds(1f);
         _animator.ResetTrigger(Flip);
         yield return new WaitForSeconds(1f);
-        CookDonut.instance.ChangeSides();
+        CookDonut.Instance.ChangeSides();
     }
     
     private bool IsPointerOverUIObject()

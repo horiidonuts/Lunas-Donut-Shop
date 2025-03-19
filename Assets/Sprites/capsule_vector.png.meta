@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 3be68e6bbf5975948a9487cfd057143b
+guid: d4cf7c7ca3d95d44e80fe7d0987092c5
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -34,12 +34,12 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
     wrapV: 1
-    wrapW: 1
+    wrapW: 0
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
@@ -123,23 +123,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: square_rounded_0
+      name: capsule_vector_0
       rect:
         serializedVersion: 2
-        x: 16
-        y: 16
-        width: 480
-        height: 480
+        x: 107
+        y: 5
+        width: 298
+        height: 502
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 150, y: 150, z: 150, w: 150}
+      border: {x: 149, y: 0, z: 149, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5c395a8d66d5bb148a996f73caf05a36
-      internalID: 1874581083
+      spriteID: 61cafcef64e361344bbb31549408d04a
+      internalID: 924545813
       vertices: []
       indices: 
       edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 97f355709fb17fb4da0107318c3b3eb5
+    spriteID: 40ad59075c1ce804dba7214b2f25121d
     internalID: 0
     vertices: []
     indices: 
@@ -158,7 +158,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      square_rounded_0: 1874581083
+      capsule_vector_0: 924545813
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

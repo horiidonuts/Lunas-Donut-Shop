@@ -48,14 +48,14 @@ public class UpdateMeter : MonoBehaviour
     
     private void FixedUpdate()
     {
-        _textMeshPro.text = ("Cooking... ["  + (int) CookDonut.instance.GetCookingMeter()+ "]");
+        _textMeshPro.text = ("Cooking... ["  + (int) CookDonut.Instance.GetCookingMeter()+ "]");
         
-        if (!_called && CookDonut.instance.GetCookingMeter() >= 100 )
+        if (!_called && CookDonut.Instance.GetCookingMeter() >= 100 )
         {
             TweenMagnitude();
         }
         
-        if (CookDonut.instance.GetCookingMeter() >= 110 && magnitude % 2 == 0 && magnitude != 30) // Metre > ise, magnitude her 2 arttiginda ve magnitude < 30 ise
+        if (CookDonut.Instance.GetCookingMeter() >= 110 && magnitude % 2 == 0 && magnitude != 30) // Metre > ise, magnitude her 2 arttiginda ve magnitude < 30 ise
         {   
             ResetPosition(); // Pozisyonu resetle/ortala
             ShakeOnOvercook(); // Texti sallandir
@@ -78,7 +78,7 @@ public class UpdateMeter : MonoBehaviour
     private void TweenMagnitude()
     {
         DOTween.To(() => magnitude, x => magnitude = x, maxMagnitude, 
-            CookDonut.instance.GetCookingTime()*0.25f).SetEase(Ease.Linear);
+            CookDonut.Instance.GetCookingTime()*0.25f).SetEase(Ease.Linear);
         _called = true;
     }
 

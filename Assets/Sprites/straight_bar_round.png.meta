@@ -139,13 +139,13 @@ TextureImporter:
       name: straight_bar_round_0
       rect:
         serializedVersion: 2
-        x: 101
+        x: 99
         y: 26
         width: 1798
         height: 248
       alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 110, y: 0, z: 110, w: 0}
       customData: 
       outline: []
       physicsShape: []
