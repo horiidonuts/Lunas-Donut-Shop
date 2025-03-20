@@ -1172,7 +1172,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -9127561607767440349, guid: d61f100ef0981c94685f354ded7f860b, type: 3}
       propertyPath: m_Materials.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -9127561607767440349, guid: d61f100ef0981c94685f354ded7f860b, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
@@ -1230,6 +1230,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -5824510187379060028, guid: d61f100ef0981c94685f354ded7f860b, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: d61f100ef0981c94685f354ded7f860b, type: 3}
       propertyPath: m_Name
       value: lunadonut2
@@ -1246,6 +1250,14 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3735102090226358198, guid: d61f100ef0981c94685f354ded7f860b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5394356810743820037, guid: d61f100ef0981c94685f354ded7f860b, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: -5287425419667122880, guid: 93dea26b387aa0c42b3d5fdfa7623a8a, type: 3}
     - target: {fileID: 8521902485874960664, guid: d61f100ef0981c94685f354ded7f860b, type: 3}
       propertyPath: m_Materials.Array.size
       value: 2
@@ -1745,7 +1757,7 @@ MonoBehaviour:
   donutUpper: {fileID: 51501268}
   cookingMeter: 0
   maxCookingAmount: 150
-  cookingTime: 20
+  cookingTime: 8
   resetDuration: 0.5
 --- !u!65 &603435372
 BoxCollider:
