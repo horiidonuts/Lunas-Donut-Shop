@@ -267,7 +267,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
-  speed: 0
+  speed: 90
   orderSphere: {fileID: 1720471375856835374}
   randomIndex: 0
   hasOrdered: 0
@@ -296,8 +296,8 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5000001
-  m_Speed: 3.5
-  m_Acceleration: 4
+  m_Speed: 90
+  m_Acceleration: 40
   avoidancePriority: 50
   m_AngularSpeed: 360
   m_StoppingDistance: 0

@@ -28,6 +28,7 @@ public class CustomerMovement : MonoBehaviour
         Pay_Zone = GameObject.Find("Pay_Zone");
         Exit_Zone = GameObject.Find("Exit_Zone");
         agent = GetComponent<NavMeshAgent>();
+        agent.speed = speed;
         randomIndex=0;
     }
 
@@ -61,6 +62,7 @@ public class CustomerMovement : MonoBehaviour
             if (Vector3.Distance(transform.position, target.position) >=
             0.1f) // Eğer müşteri ve hedef arasındaki mesafe 0.1f'den büyükse
             {
+                agent.isStopped = false;
                 agent.SetDestination(target.position); // Müşteriyi hedefe doğru hareket ettir
                 //CheckCustomerTransform(); // Müşterinin hedefe ulaşıp ulaşmadığını kontrol et
             }
@@ -72,14 +74,6 @@ public class CustomerMovement : MonoBehaviour
                 CheckCustomerTransform();
             }
         }
-
-
-
-
-
-
-
-        
     }
 
     public void SetRandomTarget()
@@ -92,8 +86,7 @@ public class CustomerMovement : MonoBehaviour
                 .transform; // Hedefi rastgele seçilen indexin pozisyonu olarak belirle
         }
     }
-
-
+    
     public void SetActive_orderSphere()
     {
         orderSphere.SetActive(true); // OrderSphere objesini aktif hale getir 
