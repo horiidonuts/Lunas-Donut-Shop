@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
-
+//not: agent.SetDestination kapanmıyor. Muhtemelen checkcustomertransform sonunda kapanması lazım ki kasımınbozukkasasına gidebisin.
 
 public class CustomerMovement : MonoBehaviour
 {
@@ -11,6 +11,7 @@ public class CustomerMovement : MonoBehaviour
 
     private bool hasReachedTarget = false; //hedefe ulaşıldı mı kontrolü
     public GameObject orderSphere;
+    public int randomIndex;
 
     NavMeshAgent agent;
     //public bool hasCompletedOrder=false;
@@ -27,6 +28,7 @@ public class CustomerMovement : MonoBehaviour
         Pay_Zone = GameObject.Find("Pay_Zone");
         Exit_Zone = GameObject.Find("Exit_Zone");
         agent = GetComponent<NavMeshAgent>();
+        randomIndex=0;
     }
 
     void Update()
@@ -46,29 +48,45 @@ public class CustomerMovement : MonoBehaviour
             SetActive_orderSphere(); // OrderIndicator scriptindeki SetActive_orderSphere metodunu çağır
             //burada Spawncustomer metodunu çağırarak yeni bir customer oluşturabilirsiniz
             CustomerSpawn.Instance.SpawnCustomer(); // Yeni bir müşteri oluştur
-
-            // target=null;
+            randomIndex=randomIndex-1;
+            target=null;
         }
     }
 
     public void moveCustomer()
     {
-        if (Vector3.Distance(transform.position, target.position) >=
+
+        if (target != null && !hasReachedTarget) // Eğer hedef belirlenmiş ve hedefe ulaşılmamışsa
+        {
+           if (Vector3.Distance(transform.position, target.position) >=
             0.1f) // Eğer müşteri ve hedef arasındaki mesafe 0.1f'den büyükse
         {
             agent.SetDestination(target.position); // Müşteriyi hedefe doğru hareket ettir
+           //CheckCustomerTransform(); // Müşterinin hedefe ulaşıp ulaşmadığını kontrol et
+
         }
-        else
+        else if (Vector3.Distance(transform.position, target.position) <
+            0.1f)
         {
-            CheckCustomerTransform(); // Müşterinin hedefe ulaşıp ulaşmadığını kontrol et
+            transform.position = Vector3.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
+            CheckCustomerTransform();
         }
+        }
+
+
+
+
+
+
+
+        
     }
 
     public void SetRandomTarget()
     {
         if (DeskStateControl.Chairs != null) // Eğer chairs listesi boş değilse ve chairs listesinde eleman varsa
         {
-            int randomIndex =
+            randomIndex =
                 DeskStateControl.Chairs.Count - 1; // Rastgele bir index belirle (listedeki son elemanın indexi)
             target = DeskStateControl.Chairs[randomIndex].gameObject
                 .transform; // Hedefi rastgele seçilen indexin pozisyonu olarak belirle
