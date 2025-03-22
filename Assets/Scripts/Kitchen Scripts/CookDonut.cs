@@ -19,10 +19,12 @@ public class CookDonut : MonoBehaviour
     private float _cookingMeterSlider;
 
 
-    private Material _lowerMaterial;
-    private Material _upperMaterial;
+    [SerializeField] private Material _lowerMaterial;
+    [SerializeField] private Material _upperMaterial;
     private bool _cookingUpper = false;
     private bool _cookingLower = false;
+    private float _lowerMeter;
+    private float _upperMeter;
     private bool _currentlyCooking = false;
 
     public static CookDonut Instance;
@@ -45,6 +47,7 @@ public class CookDonut : MonoBehaviour
         _upperMaterial = donutUpper.GetComponent<Material>();
 
         cookingMeter = Mathf.Clamp(cookingMeter, 0, maxCookingAmount);
+        _cookingLower = true;
     }
 
     void Update()
@@ -53,11 +56,17 @@ public class CookDonut : MonoBehaviour
         if (_cookingUpper)
         {
             // Cook upper side of the donut
+            DOTween.To(() => _upperMeter, x => _upperMeter = x,
+                150, cookingTime);
+            cookingMeter = _upperMeter;
         }
 
         if (_cookingLower)
         {
-            // Cook lower side of the donut
+            DOTween.To(()=> _lowerMeter, x => _lowerMeter = x,
+                150,cookingTime );
+            cookingMeter = _lowerMeter;
+            
         }
     }
 
@@ -110,5 +119,15 @@ public class CookDonut : MonoBehaviour
     public float GetCookingTime()
     {
         return cookingTime;
+    }
+
+    public bool GetCookingLower()
+    {
+        return _cookingLower;
+    }
+
+    public bool GetCookingUpper()
+    {
+        return _cookingUpper;
     }
 }
