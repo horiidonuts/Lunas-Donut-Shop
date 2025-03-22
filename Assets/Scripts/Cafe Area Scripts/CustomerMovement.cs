@@ -115,7 +115,18 @@ public class CustomerMovement : MonoBehaviour
 
     public void moveTo_PayZone()
     {
-        transform.position = Vector3.MoveTowards(transform.position, Pay_Zone.transform.position, 2f * Time.deltaTime);
+        if (Vector3.Distance(transform.position, Pay_Zone.transform.position) >=
+        0.1f) 
+        {
+            agent.isStopped = false;
+            agent.SetDestination(Pay_Zone.transform.position);
+        }
+        else if (Vector3.Distance(transform.position, Pay_Zone.transform.position) < 0.1f)
+        {
+            agent.isStopped = true;
+            agent.velocity = Vector3.zero;
+            transform.position = Vector3.MoveTowards(transform.position, Pay_Zone.transform.position, 2f * Time.deltaTime);
+        }
     }
 
     public IEnumerator WaitAndMoveToPayZone()
@@ -137,9 +148,19 @@ public class CustomerMovement : MonoBehaviour
 
     public void moveTo_Exit()
     {
-        transform.position = Vector3.MoveTowards(transform.position, Exit_Zone.transform.position, 2f * Time.deltaTime);
+        if (Vector3.Distance(transform.position, Exit_Zone.transform.position) >=
+        0.1f) 
+        {
+            agent.isStopped = false;
+            agent.SetDestination(Exit_Zone.transform.position);
+        }
+        else if (Vector3.Distance(transform.position, Exit_Zone.transform.position) < 0.1f)
+        {
+            agent.isStopped = true;
+            agent.velocity = Vector3.zero;
+            transform.position = Vector3.MoveTowards(transform.position, Exit_Zone.transform.position, 2f * Time.deltaTime);
+        }
     }
-
 
     public IEnumerator WaitAndMoveToExit()
     {
