@@ -58,19 +58,19 @@ public class CustomerMovement : MonoBehaviour
 
         if (target != null && !hasReachedTarget) // Eğer hedef belirlenmiş ve hedefe ulaşılmamışsa
         {
-           if (Vector3.Distance(transform.position, target.position) >=
+            if (Vector3.Distance(transform.position, target.position) >=
             0.1f) // Eğer müşteri ve hedef arasındaki mesafe 0.1f'den büyükse
-        {
-            agent.SetDestination(target.position); // Müşteriyi hedefe doğru hareket ettir
-           //CheckCustomerTransform(); // Müşterinin hedefe ulaşıp ulaşmadığını kontrol et
-
-        }
-        else if (Vector3.Distance(transform.position, target.position) <
-            0.1f)
-        {
-            transform.position = Vector3.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
-            CheckCustomerTransform();
-        }
+            {
+                agent.SetDestination(target.position); // Müşteriyi hedefe doğru hareket ettir
+                //CheckCustomerTransform(); // Müşterinin hedefe ulaşıp ulaşmadığını kontrol et
+            }
+            else if (Vector3.Distance(transform.position, target.position) < 0.1f)
+            {
+                agent.isStopped = true;
+                agent.velocity = Vector3.zero;
+                transform.position = Vector3.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
+                CheckCustomerTransform();
+            }
         }
 
 
