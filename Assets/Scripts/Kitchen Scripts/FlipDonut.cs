@@ -12,8 +12,9 @@ public class FlipDonut : MonoBehaviour
     private PlayerInput _playerInput;
     private InputAction _clickAction;
     private Animator _animator;
+    private bool _flipped;
     private static readonly int Flip = Animator.StringToHash("Flip");
-    
+
     private void Awake()
     {
         _playerInput = GetComponent<PlayerInput>();
@@ -23,44 +24,38 @@ public class FlipDonut : MonoBehaviour
         _mainCamera = Camera.main;
     }
 
-    void Start()
+    private void Start()
     {
-        
+        _flipped = false;
     }
-    
-    
-    void Update()
-    {
-        
-    }
-    
+
     private void OnEnable()
     {
         _clickAction.performed += OnClick;
     }
-    
+
     private void OnDisable()
     {
         _clickAction.performed -= OnClick;
     }
-    
+
     private void OnDestroy()
     {
         _playerInput.actions["Click"].performed -= OnClick;
     }
 
-    public void OnClick(InputAction.CallbackContext context)
+    private void OnClick(InputAction.CallbackContext context)
     {
         Ray ray = _mainCamera.ScreenPointToRay(Input.mousePosition);
-            
-        if (Physics.Raycast(ray, out RaycastHit hit) 
+
+        if (Physics.Raycast(ray, out RaycastHit hit)
             && hit.transform.CompareTag("Donut")
-            && !IsPointerOverUIObject())
+            && !IsPointerOverUIObject()&& !_flipped)
         {
-            
             Debug.Log("Object hit: " + hit.transform.name);
             StartCoroutine(FlipTrigger());
-             CookDonut.Instance.ResetCookingMeter();
+            CookDonut.Instance.ChangeSides();
+            _flipped = true;
         }
     }
     
@@ -70,16 +65,15 @@ public class FlipDonut : MonoBehaviour
         yield return new WaitForSeconds(1f);
         _animator.ResetTrigger(Flip);
         yield return new WaitForSeconds(1f);
-        CookDonut.Instance.ChangeSides();
     }
-    
+
     private bool IsPointerOverUIObject()
     {
         PointerEventData eventDataCurrentPosition = new PointerEventData(EventSystem.current);
         eventDataCurrentPosition.position = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
         List<RaycastResult> results = new List<RaycastResult>();
         EventSystem.current.RaycastAll(eventDataCurrentPosition, results);
-        
+
         return results.Count > 0;
     }
 }

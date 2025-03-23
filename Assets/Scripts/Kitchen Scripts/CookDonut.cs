@@ -1,7 +1,9 @@
 using System;
+using System.Collections;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class CookDonut : MonoBehaviour
 {
@@ -9,23 +11,23 @@ public class CookDonut : MonoBehaviour
     [SerializeField] private GameObject donutUpper;
     [SerializeField] private float cookingMeter;
 
-    [SerializeField] private int maxCookingAmount;
-    
+    [SerializeField] private float maxCookingAmount;
+
     [SerializeField] private float cookingTime;
     [SerializeField] private float resetDuration;
-    
+
 
     private float _elapsedUnResetTime;
-    private float _cookingMeterSlider;
-
-
-    [SerializeField] private Material _lowerMaterial;
-    [SerializeField] private Material _upperMaterial;
-    private bool _cookingUpper = false;
-    private bool _cookingLower = false;
+    
+    [SerializeField] private Material lowerMaterial;
+    [SerializeField] private Material upperMaterial;
+    [SerializeField] private bool _cookingUpper;
+    [SerializeField] private bool _cookingLower;
     private float _lowerMeter;
     private float _upperMeter;
     private bool _currentlyCooking = false;
+
+    private bool _tweenCalled;
 
     public static CookDonut Instance;
 
@@ -38,72 +40,79 @@ public class CookDonut : MonoBehaviour
         }
     }
 
-
     void Start()
     {
         cookingMeter = 0;
-        _cookingMeterSlider = cookingMeter;
-        _lowerMaterial = donutLower.GetComponent<Material>();
-        _upperMaterial = donutUpper.GetComponent<Material>();
+
+        lowerMaterial = donutLower.GetComponent<Material>();
+        upperMaterial = donutUpper.GetComponent<Material>();
 
         cookingMeter = Mathf.Clamp(cookingMeter, 0, maxCookingAmount);
+        _lowerMeter = Mathf.Clamp(_lowerMeter, 0, maxCookingAmount);
+        _upperMeter = Mathf.Clamp(_upperMeter, 0, maxCookingAmount);
+
         _cookingLower = true;
+        _tweenCalled = false;
     }
 
-    void Update()
+    private void FixedUpdate()
     {
-        //Debug.Log(cookingMeter);
+        IncreaseCookingMeter();
+
         if (_cookingUpper)
         {
-            // Cook upper side of the donut
-            DOTween.To(() => _upperMeter, x => _upperMeter = x,
-                150, cookingTime);
             cookingMeter = _upperMeter;
         }
 
         if (_cookingLower)
         {
-            DOTween.To(()=> _lowerMeter, x => _lowerMeter = x,
-                150,cookingTime );
             cookingMeter = _lowerMeter;
-            
-        }
-    }
-
-    private void FixedUpdate()
-    {
-        if (!_currentlyCooking)
-        {
-            IncreaseCookingMeter();
-        }
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("CookingPan"))
-        {
-            _cookingLower = true;
         }
     }
 
     private void IncreaseCookingMeter()
     {
-        DOTween.To(() => cookingMeter, x => cookingMeter = x,
-            150, cookingTime).SetEase(Ease.Linear).SetId("CookingMeter");
+        if (_cookingLower) // Cook lower side of the donut
+        {
+            if (!_tweenCalled)
+            {
+                _tweenCalled = true;
+                DOTween.To(() => _lowerMeter, x => _lowerMeter = x,
+                    maxCookingAmount, cookingTime).SetEase(Ease.Linear).SetId("CookingLower");
+            }
+        }
+
+        if (_cookingUpper) // Cook upper side of the donut
+        {
+            if (!_tweenCalled)
+            {
+                _tweenCalled = true;
+                DOTween.To(() => _upperMeter, x => _upperMeter = x,
+                    maxCookingAmount, cookingTime).SetEase(Ease.Linear).SetId("CookingUpper");
+            }
+        }
         _currentlyCooking = true;
     }
-    
-    public void ResetCookingMeter()
+
+    private void ResetCookingMeter()
     {
-        DOTween.Kill("CookingMeter");
         DOTween.To(() => cookingMeter, x => cookingMeter = x,
-            0f, resetDuration).SetEase(Ease.OutQuint).OnComplete(IncreaseCookingMeter);
+                0f, resetDuration).SetEase(Ease.OutQuint);
     }
 
     public void ChangeSides()
     {
-        _cookingUpper = !_cookingUpper;
+        StartCoroutine(ChangeSidesDelay());
+    }
+
+    private IEnumerator ChangeSidesDelay()
+    {
+        DOTween.Kill("CookingLower");
         _cookingLower = !_cookingLower;
+        ResetCookingMeter();
+        yield return new WaitForSeconds(resetDuration);
+        _cookingUpper = !_cookingUpper;
+        _tweenCalled = false;
     }
 
     public float GetCookingMeter()
@@ -121,13 +130,8 @@ public class CookDonut : MonoBehaviour
         return cookingTime;
     }
 
-    public bool GetCookingLower()
+    public float GetResetDuration()
     {
-        return _cookingLower;
-    }
-
-    public bool GetCookingUpper()
-    {
-        return _cookingUpper;
+        return resetDuration;
     }
 }

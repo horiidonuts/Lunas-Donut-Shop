@@ -25,12 +25,6 @@ public class UpdateMeter : MonoBehaviour
     
     void Start()
     {
-        //_cookDonut = GetComponentInParent<CookDonut>();
-        // if (_cookDonut == null)
-        // {
-        //     Debug.LogError("CookDonut component not found!");
-        // }
-
         _textMeshPro = GetComponent<TextMeshProUGUI>();
         if (_textMeshPro == null)
         {
