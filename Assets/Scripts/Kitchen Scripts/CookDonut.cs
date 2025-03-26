@@ -21,8 +21,8 @@ public class CookDonut : MonoBehaviour
     
     [SerializeField] private Material lowerMaterial;
     [SerializeField] private Material upperMaterial;
-    [SerializeField] private bool _cookingUpper;
-    [SerializeField] private bool _cookingLower;
+    [FormerlySerializedAs("_cookingUpper")] [SerializeField] private bool cookingUpper;
+    [FormerlySerializedAs("_cookingLower")] [SerializeField] private bool cookingLower;
     private float _lowerMeter;
     private float _upperMeter;
     private bool _currentlyCooking = false;
@@ -51,7 +51,7 @@ public class CookDonut : MonoBehaviour
         _lowerMeter = Mathf.Clamp(_lowerMeter, 0, maxCookingAmount);
         _upperMeter = Mathf.Clamp(_upperMeter, 0, maxCookingAmount);
 
-        _cookingLower = true;
+        cookingLower = true;
         _tweenCalled = false;
     }
 
@@ -59,12 +59,12 @@ public class CookDonut : MonoBehaviour
     {
         IncreaseCookingMeter();
 
-        if (_cookingUpper)
+        if (cookingUpper)
         {
             cookingMeter = _upperMeter;
         }
 
-        if (_cookingLower)
+        if (cookingLower)
         {
             cookingMeter = _lowerMeter;
         }
@@ -72,7 +72,7 @@ public class CookDonut : MonoBehaviour
 
     private void IncreaseCookingMeter()
     {
-        if (_cookingLower) // Cook lower side of the donut
+        if (cookingLower) // Cook lower side of the donut
         {
             if (!_tweenCalled)
             {
@@ -82,7 +82,7 @@ public class CookDonut : MonoBehaviour
             }
         }
 
-        if (_cookingUpper) // Cook upper side of the donut
+        if (cookingUpper) // Cook upper side of the donut
         {
             if (!_tweenCalled)
             {
@@ -108,10 +108,10 @@ public class CookDonut : MonoBehaviour
     private IEnumerator ChangeSidesDelay()
     {
         DOTween.Kill("CookingLower");
-        _cookingLower = !_cookingLower;
+        cookingLower = !cookingLower;
         ResetCookingMeter();
         yield return new WaitForSeconds(resetDuration);
-        _cookingUpper = !_cookingUpper;
+        cookingUpper = !cookingUpper;
         _tweenCalled = false;
     }
 

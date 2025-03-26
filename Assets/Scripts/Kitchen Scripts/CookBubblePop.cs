@@ -31,12 +31,12 @@ public class CookBubblePop : MonoBehaviour
     
     void Update()
     {
-        if (!_isPanelOpen && _kuiAnimHandle.GetPhase() == 1) // Panel kapali ve faz 1 ise baloncugu ac
+        if (!_isPanelOpen && _kuiAnimHandle.GetPhase() == 1 && !MoveDonutToBoard.Instance.IsOnBoard()) // Panel kapali ve faz 1 ise baloncugu ac
         {
             OpenBubble();
         }
 
-        if (_isPanelOpen && _kuiAnimHandle.GetPhase() != 1) // Panel acik ve faz 1 degil ise baloncugu kapat
+        if (_isPanelOpen && _kuiAnimHandle.GetPhase() != 1 && MoveDonutToBoard.Instance.IsOnBoard()) // Panel acik ve faz 1 degil ise baloncugu kapat
         {
             CloseBubble();
         }
