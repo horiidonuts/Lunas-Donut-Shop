@@ -54,6 +54,11 @@ public class UpdateMeter : MonoBehaviour
             ResetPosition(); // Pozisyonu resetle/ortala
             ShakeOnOvercook(); // Texti sallandir
         }
+
+        else
+        {
+            ResetPosition();
+        }
     }
 
     private void ShakeOnOvercook()
