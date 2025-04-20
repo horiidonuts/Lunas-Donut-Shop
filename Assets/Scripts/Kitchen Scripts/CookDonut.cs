@@ -129,9 +129,4 @@ public class CookDonut : MonoBehaviour
     {
         return cookingTime;
     }
-
-    public float GetResetDuration()
-    {
-        return resetDuration;
-    }
 }

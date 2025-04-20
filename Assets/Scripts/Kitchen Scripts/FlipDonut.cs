@@ -44,16 +44,16 @@ public class FlipDonut : MonoBehaviour
     private void OnClick(InputAction.CallbackContext context)
     {
         RaycastHit hit;
-        Ray ray = _mainCamera.ScreenPointToRay(Input.mousePosition);
+        Ray ray = _mainCamera.ScreenPointToRay(Input.mousePosition); // Ekrandan dunyaya raycast
 
-        if (Physics.Raycast(ray, out hit)
-            && hit.transform.CompareTag("Donut")
-            && !IsPointerOverUIObject())
+        if (Physics.Raycast(ray, out hit) // Eger raycast bit objeye carparsa,  
+            && hit.transform.CompareTag("Donut") // bu donutsa ve
+            && !IsPointerOverUIObject()) // uzerinde bir ui objesi yoksa
         {
-            if (!_flipped)
+            if (!_flipped) // Donut daha once cevirilmemisse
             {
-                Debug.Log("Object hit: " + hit.transform.name);
-                StartCoroutine(FlipTrigger());
+                Debug.Log("Object hit: " + hit.transform.name); // Raycastin carptigi objeyi yazdir
+                StartCoroutine(FlipTrigger()); // 
                 CookDonut.Instance.ChangeSides();
                 _flipped = true;
             }
