@@ -68,9 +68,7 @@ public class FlipDonut : MonoBehaviour
     private IEnumerator FlipTrigger()
     {
         _animator.SetTrigger(Flip);
-        yield return new WaitForSeconds(1f);
-        _animator.ResetTrigger(Flip);
-        yield return new WaitForSeconds(1f);
+        yield return null;
     }
 
     private bool IsPointerOverUIObject()

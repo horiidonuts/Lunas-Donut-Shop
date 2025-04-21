@@ -1950,8 +1950,9 @@ MonoBehaviour:
   maxCookingAmount: 150
   cookingTime: 8
   resetDuration: 0.5
-  lowerMaterial: {fileID: 0}
-  upperMaterial: {fileID: 0}
+  material: {fileID: 0}
+  maxColor: {r: 0.33490568, g: 0.16615476, b: 0, a: 0}
+  easing: 5
   cookingUpper: 0
   cookingLower: 0
 --- !u!65 &603435372
@@ -2113,11 +2114,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   endPos: {x: 0.309, y: 1.0959107, z: 2.462}
-  jumpPower: 0.25
+  jumpPower: 0.5
   jumpCount: 1
   duration: 0.75
   snap: 0
-  easing: 9
+  moveEasing: 7
+  rotateEasing: 3
 --- !u!1 &658133504
 GameObject:
   m_ObjectHideFlags: 0
