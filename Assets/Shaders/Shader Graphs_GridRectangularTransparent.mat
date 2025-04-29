@@ -57,6 +57,6 @@ Material:
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _DefaultScale: {r: 6, g: 6, b: 0, a: 0}
-    - _Size: {r: 1.67, g: 1.67, b: 0, a: 0}
+    - _Size: {r: 6.68, g: 6.68, b: 0, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
