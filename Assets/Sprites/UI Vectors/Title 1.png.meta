@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 3ffd7e791ae4a4a42b044f4c7e881297
+guid: 8b8015ccb636b9e4a91852ab80e0bff8
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -48,7 +48,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 885
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -110,13 +110,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: "sprite sheet kafe oyunu son tasar\u0131m\u0131 renk uyum denemesi_0"
+      name: Title 1_0
       rect:
         serializedVersion: 2
-        x: 62
-        y: 938
-        width: 277
-        height: 496
+        x: 301
+        y: 312
+        width: 633
+        height: 618
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -125,30 +125,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 00bdaa5591c0397469f27e7003f3c57a
-      internalID: 291714439
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: "sprite sheet kafe oyunu son tasar\u0131m\u0131 renk uyum denemesi_1"
-      rect:
-        serializedVersion: 2
-        x: 346
-        y: 943
-        width: 285
-        height: 505
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 8db3dbd2f7c5e944ab6e588eead45287
-      internalID: -35174077
+      spriteID: e67fc906de340454e83aa34cfec71761
+      internalID: 80781842
       vertices: []
       indices: 
       edges: []
@@ -157,7 +135,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 54fd1be6ca98a2a4baed7553e4e71f76
+    spriteID: 9191a0d184e622740a847f492666aa84
     internalID: 0
     vertices: []
     indices: 
@@ -167,8 +145,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      "sprite sheet kafe oyunu son tasar\u0131m\u0131 renk uyum denemesi_0": 291714439
-      "sprite sheet kafe oyunu son tasar\u0131m\u0131 renk uyum denemesi_1": -35174077
+      Title 1_0: 80781842
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
