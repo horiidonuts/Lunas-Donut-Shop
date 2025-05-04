@@ -1,10 +1,7 @@
-using System;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class PanelAnimHandler : MonoBehaviour
 {
-
     public static PanelAnimHandler Instance;
 
     private void Awake()
@@ -17,39 +14,34 @@ public class PanelAnimHandler : MonoBehaviour
     [SerializeField] private bool _playerHasOrder; //oyuncunun sipariş alıp almadığını kontrol eder
     [SerializeField] Animator anim; //panel animasyonunu kontrol eder
 
-        public string PlayerSelectPrepared_Sauce;
-
+    public string PlayerSelectPrepared_Sauce;
 
 
 //seçimleri buradan alacağız
 
-
-
-
     void Start()
     {
-       // anim = GetComponent<Animator>();
+        // anim = GetComponent<Animator>();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
-        if (canProcessOrder && Input.GetKeyDown(KeyCode.E) && _playerHasOrder) //oyuncu
+        if (canProcessOrder && Input.GetKeyDown(KeyCode.E) && _playerHasOrder)
         {
-            OpenPanel();
-            
+            // OpenPanel();
+            TransitionEffect.Instance.TransitionIn(2);
         }
     }
 
-    private void OnTriggerEnter(Collider other) 
+    private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Player") //etiketi oyuncu olan nesne mutfak tezgahına yaklaştığında
+        if (other.tag == "InteractCollider") //etiketi oyuncu olan nesne mutfak tezgahına yaklaştığında
         {
-           // player = other.gameObject; //oyuncu nesnesini player değişkenine ata
-            canProcessOrder = true; //sipariş alındıya hazırlanabilir (işlenebilir) durumunu true yap (karakter mutfak teezgahının içine girince)
-            GetPlayerOrderState(); 
-
+            Debug.Log("Can Open Panel");
+            // player = other.gameObject; //oyuncu nesnesini player değişkenine ata
+            canProcessOrder =
+                true; //sipariş alındıya hazırlanabilir (işlenebilir) durumunu true yap (karakter mutfak teezgahının içine girince)
+            GetPlayerOrderState();
         }
     }
 
@@ -60,17 +52,16 @@ public class PanelAnimHandler : MonoBehaviour
     }
 
 
-     public void PlayerSelectSauce_Chocolate()
+    public void PlayerSelectSauce_Chocolate()
     {
         PlayerSelectPrepared_Sauce = "Chocolate";
-        Debug.Log("PlayerSelectPrepared_Sauce: "+PlayerSelectPrepared_Sauce);
+        Debug.Log("PlayerSelectPrepared_Sauce: " + PlayerSelectPrepared_Sauce);
     }
 
 
-     public void PlayerSelectSauce_Strawberry()
+    public void PlayerSelectSauce_Strawberry()
     {
         PlayerSelectPrepared_Sauce = "Strawberry";
-        
     }
 
 
@@ -79,13 +70,6 @@ public class PanelAnimHandler : MonoBehaviour
         PlayerSelectPrepared_Sauce = "Vanilla";
     }
 
-
-
-
-
-
-
-    
     void OpenPanel()
     {
         anim.SetBool("panel_open", true);
@@ -98,18 +82,14 @@ public class PanelAnimHandler : MonoBehaviour
 
         OrderCheck.Instance.CheckOrder();
         //OrderPrepare.Instance.DonutOrder_prepare();
-        
+
 
         //donut instantiate olacak TakeOrder scripti içinde
     }
 
     private void GetPlayerOrderState()
     {
-      _playerHasOrder = TakeOrder.Instance.HasPlayerOrder(); //daha okunaklı olması için takeorderdan playerHasOrderı return ettim
+        _playerHasOrder =
+            TakeOrder.Instance.HasPlayerOrder(); //daha okunaklı olması için takeorderdan playerHasOrderı return ettim
     }
-
-    
-
-
-
 }

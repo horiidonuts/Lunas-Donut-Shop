@@ -28,7 +28,7 @@ public class Movement : MonoBehaviour
         wUpHash = Animator.StringToHash("wUp");
         wDownHash = Animator.StringToHash("wDown");
         wLeftHash = Animator.StringToHash("wLeft");
-        wRightHash = Animator.StringToHash("wRight");    
+        wRightHash = Animator.StringToHash("wRight");
     }
 
     void FixedUpdate()
@@ -39,16 +39,16 @@ public class Movement : MonoBehaviour
     void HandleMove()
     {
         Vector2 direction = moveAction.ReadValue<Vector2>();
-        transform.position += new Vector3(-direction.x + -direction.y, 0, -direction.y + direction.x) * moveSpeed * Time.deltaTime;
-        
+        transform.position += new Vector3(-direction.x + -direction.y, 0, -direction.y + direction.x) *
+                              (moveSpeed * Time.deltaTime);
+
         //  full up
         if (new Vector3(-direction.x + -direction.y, 0, -direction.y + direction.x) == new Vector3(-1, 0, -1))
         {
             animator.SetBool(wUpHash, true);
-            animator.SetBool(wDownHash,false);
-            animator.SetBool(wLeftHash,false);
-            animator.SetBool(wRightHash,false);
-            
+            animator.SetBool(wDownHash, false);
+            animator.SetBool(wLeftHash, false);
+            animator.SetBool(wRightHash, false);
         }
 
         //  full left
@@ -56,17 +56,17 @@ public class Movement : MonoBehaviour
         {
             animator.SetBool(wLeftHash, true);
             animator.SetBool(wUpHash, false);
-            animator.SetBool(wDownHash,false);
-            animator.SetBool(wRightHash,false);
+            animator.SetBool(wDownHash, false);
+            animator.SetBool(wRightHash, false);
         }
 
         //  upleft
         else if (direction.x < 0 && direction.y > 0)
         {
             animator.SetBool(wUpHash, false);
-            animator.SetBool(wDownHash,false);
-            animator.SetBool(wLeftHash,true);
-            animator.SetBool(wRightHash,false);
+            animator.SetBool(wDownHash, false);
+            animator.SetBool(wLeftHash, true);
+            animator.SetBool(wRightHash, false);
         }
 
         // full right
@@ -74,8 +74,8 @@ public class Movement : MonoBehaviour
         {
             animator.SetBool(wRightHash, true);
             animator.SetBool(wUpHash, false);
-            animator.SetBool(wDownHash,false);
-            animator.SetBool(wLeftHash,false);
+            animator.SetBool(wDownHash, false);
+            animator.SetBool(wLeftHash, false);
         }
 
         //  full down
@@ -84,16 +84,16 @@ public class Movement : MonoBehaviour
             animator.SetBool(wDownHash, true);
             animator.SetBool(wUpHash, false);
             animator.SetBool(wRightHash, false);
-            animator.SetBool(wLeftHash,false);
+            animator.SetBool(wLeftHash, false);
         }
 
         //  upright
         else if (direction.x > 0 && direction.y > 0)
         {
             animator.SetBool(wUpHash, false);
-            animator.SetBool(wDownHash,false);
-            animator.SetBool(wLeftHash,false);
-            animator.SetBool(wRightHash,true);
+            animator.SetBool(wDownHash, false);
+            animator.SetBool(wLeftHash, false);
+            animator.SetBool(wRightHash, true);
         }
 
         // downright
@@ -102,7 +102,7 @@ public class Movement : MonoBehaviour
             animator.SetBool(wDownHash, true);
             animator.SetBool(wUpHash, false);
             animator.SetBool(wRightHash, false);
-            animator.SetBool(wLeftHash,false);
+            animator.SetBool(wLeftHash, false);
         }
 
         //  downleft
@@ -111,20 +111,17 @@ public class Movement : MonoBehaviour
             animator.SetBool(wDownHash, true);
             animator.SetBool(wUpHash, false);
             animator.SetBool(wLeftHash, false);
-            animator.SetBool(wRightHash,false);
-            
+            animator.SetBool(wRightHash, false);
         }
 
         //  standing still
-        else 
+        else
         {
             animator.SetBool(wUpHash, false);
-            animator.SetBool(wDownHash,false);
-            animator.SetBool(wLeftHash,false);
-            animator.SetBool(wRightHash,false);
+            animator.SetBool(wDownHash, false);
+            animator.SetBool(wLeftHash, false);
+            animator.SetBool(wRightHash, false);
         }
-
-
     }
 
     void MoveAnim()
@@ -134,11 +131,4 @@ public class Movement : MonoBehaviour
         bool wLeft = animator.GetBool(wLeftHash);
         bool wRight = animator.GetBool(wRightHash);
     }
-
-    // private void OnTriggerEnter(Collider other)
-    // {
-    //     Collider collider;
-    //     collider = other.GetComponent<Collider>();
-    //     Debug.Log("object hit: "+ collider);
-    // }
 }

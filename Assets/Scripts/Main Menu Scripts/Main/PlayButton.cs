@@ -21,8 +21,8 @@ public class PlayButton : MonoBehaviour
     {
         float duration = TransitionEffect.Instance.GetDuration();
         float waitTime = TransitionEffect.Instance.GetWaitTime();
-        TransitionEffect.Instance.TransitionIn();
+        TransitionEffect.Instance.TransitionIn(1);
         yield return new WaitForSeconds(duration + waitTime);
-        SceneManager.Instance.LoadScene(1);
+        // SceneManager.Instance.LoadScene(1);
     }
 }

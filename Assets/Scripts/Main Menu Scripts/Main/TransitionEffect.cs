@@ -56,18 +56,24 @@ public class TransitionEffect : MonoBehaviour
         return waitTime;
     }
 
-    public void TransitionIn()
+    public void TransitionIn(int sceneIndex)
     {
-        StartCoroutine(SlideImage());
+        StartCoroutine(SlideImage(sceneIndex));
         Debug.Log("Translate in");
     }
 
-    private IEnumerator SlideImage() // Koseden gelen overlayi kaydir ve kaymasi bitince kafe sahnesini yukle
+    private IEnumerator SlideImage(int sceneIndex) // Koseden gelen overlayi kaydir ve kaymasi bitince kafe sahnesini yukle
     {
         yield return new WaitForSeconds(waitTime);
         DOTween.To(() => startWidth, x => startWidth = x,
             endWidth, duration).SetEase(Ease.OutQuad);
-        yield return new WaitForSeconds(duration);
+        
+        if (sceneIndex != -1)
+        {
+            yield return new WaitForSeconds(duration + waitTime);
+            SceneManager.Instance.LoadScene(sceneIndex);
+        }
+        
         ResetTransition();
     }
 

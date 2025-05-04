@@ -25,8 +25,8 @@ public class PauseButton : MonoBehaviour
     {
         float duration = TransitionEffect.Instance.GetDuration();
         float waitTime = TransitionEffect.Instance.GetWaitTime();
-        TransitionEffect.Instance.TransitionIn();
+        TransitionEffect.Instance.TransitionIn(0);
         yield return new WaitForSeconds(duration + waitTime);
-        UnityEngine.SceneManagement.SceneManager.LoadScene(index);
+        //UnityEngine.SceneManagement.SceneManager.LoadScene(index);
     }
 }

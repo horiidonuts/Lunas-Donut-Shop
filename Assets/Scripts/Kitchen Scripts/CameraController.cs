@@ -16,6 +16,7 @@ public class CameraController : MonoBehaviour
     
     void Start()
     {
+        TransitionOut.Instance.TranslateOut();
         mainCamera = Camera.main;
         _kuiHandle = GetComponent<KitchenUiAnimHandle>();
         _currentFov = mainCamera.fieldOfView;

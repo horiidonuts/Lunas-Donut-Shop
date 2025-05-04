@@ -35,6 +35,7 @@ public class TransitionOut : MonoBehaviour
 
     public void TranslateOut()
     {
+        ResetTransition();
         DOTween.To(() => startSize, x => startSize = x,
             endSize, duration).SetEase(Ease.OutQuad);
         Debug.Log("Translated Out");

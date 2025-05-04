@@ -32,6 +32,7 @@ public class TakeOrder : MonoBehaviour
             DisableSphere(); 
 
             var donutOrder=customer.GetComponent<DonutOrder>();
+            
             if (donutOrder != null)
             {
                 DonutOrder.SauceType DonutSauce = donutOrder.sauce;

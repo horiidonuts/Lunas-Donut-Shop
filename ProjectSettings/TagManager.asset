@@ -15,6 +15,7 @@ TagManager:
   - pay_zone
   - Donut
   - CookingPan
+  - InteractCollider
   layers:
   - Default
   - TransparentFX

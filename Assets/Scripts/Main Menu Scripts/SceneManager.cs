@@ -3,9 +3,9 @@ using UnityEngine.SceneManagement;
 
 public class SceneManager : MonoBehaviour
 {
-    [SerializeField] private int cafeSceneIndex;
-    [SerializeField] private int menuSceneIndex;
-    [SerializeField] private int kitchenSceneIndex;
+    // Menu index: 0
+    // Cafe index: 1
+    // Kitchen index: 2
     
     public static SceneManager Instance;
 
