@@ -1,10 +1,5 @@
-using System;
 using System.Collections;
-using Mono.Cecil.Cil;
-using Unity.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class KitchenUiAnimHandle : MonoBehaviour
@@ -41,7 +36,7 @@ public class KitchenUiAnimHandle : MonoBehaviour
 
     private void Update() 
     {
-        if (_camController.GetCurrentPos() == new Vector3(-0.8f, 1.95f, 1.27f))
+        if (currentPhase == 1)
         {
             DisableSingularButton(1);
         }

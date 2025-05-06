@@ -6,53 +6,61 @@ public class CameraController : MonoBehaviour
 {
     [SerializeField] private float moveAmountX;
     [SerializeField] private float moveDuration;
-    [SerializeField] private float _zoomTime;
-    
-    [FormerlySerializedAs("_mainCamera")] [SerializeField] Camera mainCamera;
-    private KitchenUiAnimHandle _kuiHandle;
+    [SerializeField] private float zoomTime;
+
+    [SerializeField] Camera mainCamera;
+
+    [SerializeField] private KitchenUiAnimHandle kuiHandle;
     private int _currentPhase;
     private float _currentFov;
-    private bool _zoomedIn = false;
-    
+    private bool _zoomedIn;
+
     void Start()
     {
         TransitionOut.Instance.TranslateOut();
-        mainCamera = Camera.main;
-        _kuiHandle = GetComponent<KitchenUiAnimHandle>();
+        //mainCamera = Camera.main;
+        kuiHandle = kuiHandle.GetComponent<KitchenUiAnimHandle>();
         _currentFov = mainCamera.fieldOfView;
     }
-    
-    // void Update()
-    // {
-        
-    // }
 
     public void MoveCameraToRight()
     {
-        Vector3 targetPos = new Vector3(mainCamera.transform.position.x + moveAmountX, mainCamera.transform.position.y, mainCamera.transform.position.z);
-        mainCamera.transform.DOMove(targetPos, moveDuration,false).SetEase(Ease.OutQuart).OnComplete(
-         ()=>{
-            targetPos=new Vector3(mainCamera.transform.position.x+moveAmountX,
-            mainCamera.transform.position.y,
+        Vector3 targetPos = new Vector3(mainCamera.transform.position.x + moveAmountX, mainCamera.transform.position.y,
             mainCamera.transform.position.z);
+        mainCamera.transform.DOMove(targetPos, moveDuration, false).SetEase(Ease.OutQuart).OnComplete(
+            () =>
+            {
+                targetPos = new Vector3(mainCamera.transform.position.x + moveAmountX,
+                    mainCamera.transform.position.y,
+                    mainCamera.transform.position.z);
             }
-         );
-        _kuiHandle.IncreasePhase();
-        _currentPhase = _kuiHandle.GetPhase();
+        );
+        
+        if (kuiHandle == null)
+        {
+            Debug.LogError("KitchenUiAnimHandle is not assigned!");
+            return;
+        }
+        
+        kuiHandle.IncreasePhase();
+        _currentPhase = kuiHandle.GetPhase();
+        Debug.Log("Phase increased. Current phase: " + _currentPhase);
     }
 
     public void MoveCameraToLeft()
     {
-        Vector3 targetPos = new Vector3(mainCamera.transform.position.x - moveAmountX, mainCamera.transform.position.y, mainCamera.transform.position.z);
-        mainCamera.transform.DOMove(targetPos, moveDuration,false).SetEase(Ease.OutQuart).OnComplete(
-            ()=>{
-                targetPos=new Vector3(mainCamera.transform.position.x-moveAmountX,
-                mainCamera.transform.position.y,
-                mainCamera.transform.position.z);
+        Vector3 targetPos = new Vector3(mainCamera.transform.position.x - moveAmountX, mainCamera.transform.position.y,
+            mainCamera.transform.position.z);
+        mainCamera.transform.DOMove(targetPos, moveDuration, false).SetEase(Ease.OutQuart).OnComplete(
+            () =>
+            {
+                targetPos = new Vector3(mainCamera.transform.position.x - moveAmountX,
+                    mainCamera.transform.position.y,
+                    mainCamera.transform.position.z);
             }
-        ); 
-        _kuiHandle.DecreasePhase();
-        _currentPhase = _kuiHandle.GetPhase();
+        );
+        kuiHandle.DecreasePhase();
+        _currentPhase = kuiHandle.GetPhase();
     }
 
     public Vector3 GetCurrentPos()
@@ -62,13 +70,13 @@ public class CameraController : MonoBehaviour
 
     public void ZoomIn()
     {
-        DOTween.To(() => mainCamera.fieldOfView, x => mainCamera.fieldOfView = x, 30, _zoomTime).SetEase(Ease.OutQuart);
+        DOTween.To(() => mainCamera.fieldOfView, x => mainCamera.fieldOfView = x, 30, zoomTime).SetEase(Ease.OutQuart);
         _zoomedIn = true;
     }
 
     public void ZoomOut()
     {
-        DOTween.To(() => mainCamera.fieldOfView, x => mainCamera.fieldOfView = x, 50, _zoomTime).SetEase(Ease.OutQuart);
+        DOTween.To(() => mainCamera.fieldOfView, x => mainCamera.fieldOfView = x, 50, zoomTime).SetEase(Ease.OutQuart);
         _zoomedIn = false;
     }
 
