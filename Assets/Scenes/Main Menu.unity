@@ -285,6 +285,7 @@ MonoBehaviour:
   easing: 17
   settingsEasing: 10
   defaultWidth: 4
+  scrollSpeed: 0.05
 --- !u!1 &226052661
 GameObject:
   m_ObjectHideFlags: 0
@@ -1457,7 +1458,7 @@ RectTransform:
   m_Children:
   - {fileID: 458517589}
   - {fileID: 409787275}
-  m_Father: {fileID: 1158371081}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -2400,7 +2401,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 726130408}
   - {fileID: 1171624878}
   - {fileID: 1947323757}
   m_Father: {fileID: 0}
@@ -3405,7 +3405,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.7318058, g: 0.8355012, b: 1, a: 1}
+  m_Color: {r: 0.7318058, g: 0.8355012, b: 1, a: 0.8}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -3421,7 +3421,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
+  m_PixelsPerUnitMultiplier: 3.5
 --- !u!222 &1462157880
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -5054,7 +5054,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1278122371327188413, guid: 48e1a60dd43d3144e9a76a4f39829b89, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 42
+      value: 49.24
       objectReference: {fileID: 0}
     - target: {fileID: 1278122371327188413, guid: 48e1a60dd43d3144e9a76a4f39829b89, type: 3}
       propertyPath: m_SizeDelta.y
@@ -5354,6 +5354,7 @@ SceneRoots:
   - {fileID: 974804334}
   - {fileID: 2084071227}
   - {fileID: 6367443027407281862}
+  - {fileID: 726130408}
   - {fileID: 1158371081}
   - {fileID: 1006028229}
   - {fileID: 1594181541}

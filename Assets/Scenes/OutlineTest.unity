@@ -240,7 +240,7 @@ GameObject:
   - component: {fileID: 330853144}
   - component: {fileID: 330853143}
   - component: {fileID: 330853142}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -592,6 +592,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 436ab791619454446a7ab8864dde1639, type: 3}
       propertyPath: m_Name
       value: cafe_table_edited
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 436ab791619454446a7ab8864dde1639, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

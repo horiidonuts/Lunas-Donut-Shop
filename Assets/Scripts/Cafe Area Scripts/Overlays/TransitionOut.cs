@@ -22,7 +22,7 @@ public class TransitionOut : MonoBehaviour
 
     void Start()
     {
-         _defaultSize = startSize;
+        _defaultSize = startSize;
         _rectTransform = GetComponent<RectTransform>();
         _rectTransform.sizeDelta = startSize;
         TranslateOut();
@@ -46,10 +46,5 @@ public class TransitionOut : MonoBehaviour
         DOTween.To(() => startSize, x => startSize = x,
             _defaultSize, 0f);
         Debug.Log("Reset transition out size");
-    }
-
-    public float GetDuration()
-    {
-        return duration;
     }
 }

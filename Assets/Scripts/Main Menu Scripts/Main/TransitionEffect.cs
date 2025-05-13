@@ -1,11 +1,6 @@
-using System;
 using System.Collections;
 using DG.Tweening;
-using Unity.VisualScripting;
-using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class TransitionEffect : MonoBehaviour

@@ -13,19 +13,25 @@ public class MenuBg : MonoBehaviour
     [SerializeField] Ease easing; // Kayma sönümlemesi
     [SerializeField] private Ease settingsEasing;
     [SerializeField] private float defaultWidth; // Ana menudeki default genislik
-    
+    [SerializeField] private float scrollSpeed;
     
     private RawImage _image;
+    private float _timePassed;
     void Start()
     {
         _image = GetComponent<RawImage>();
         //_width = _image.uvRect.width;
         ReturnedToMenu();
+        
     }
 
     void Update()
     {
         _image.uvRect = new Rect(0f, 0f, _width, 1f); // Değiştirdiğimiz genişliği her frame'de UV Rect'e eşitliyoruz
+        _timePassed += Time.deltaTime;
+        var rect = _image.uvRect;
+        rect.x += scrollSpeed * _timePassed;
+        _image.uvRect = rect;
     }
 
     public void SlideImage() // Oyunu başlatırkenki kaydırma efekti

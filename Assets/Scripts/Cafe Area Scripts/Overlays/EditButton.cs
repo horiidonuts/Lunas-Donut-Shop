@@ -1,16 +1,11 @@
-using System.Collections;
 using DG.Tweening;
-using TMPro;
 using UnityEngine;
-using UnityEngine.UIElements;
 using Button = UnityEngine.UI.Button;
 
 public class EditButton : MonoBehaviour
 {
     [SerializeField] private float duration;
-    
-    
-    private RectTransform _rectTransform;
+
     private Button _button;
     private Vector2 _originalSize;
     private GameObject _buttonText;
@@ -19,33 +14,40 @@ public class EditButton : MonoBehaviour
     [SerializeField] private Ease easeOut;
     [SerializeField] private bool editMode;
     [SerializeField] private Sprite exitSprite;
-    
-    
-    
+
+    private PauseButton _pauseButton;
+
     void Start()
     {
+        _pauseButton = GameObject.Find("PauseButton").GetComponent<PauseButton>();
         _buttonText = GameObject.Find("EditButtonText");
-        _rectTransform = GetComponent<RectTransform>();
         _button = GetComponent<Button>();
         _button.onClick.AddListener(Click);
-        // Debug.Log(_button.transform.localScale);
         _originalSize = _button.transform.localScale;
     }
 
     private void Click()
     {
+        // if (editMode)
+        // {
+        //     _button.transform.position = _pauseButton.EditButtonDefaultPos();
+        // }
         ButtonAnimation();
+        _pauseButton.ClosePausePanel();
         editMode = !editMode;
-        
+
         if (editMode)
         {
             _button.image.overrideSprite = exitSprite;
             _buttonText.SetActive(false);
+            _button.transform.SetParent(GameObject.Find("UI").transform, true);
+            _button.transform.DOMove(new Vector3(_button.transform.position.x - 100, _button.transform.position.y-100, 0), 0.5f);
         }
-        else
+        if (!editMode)
         {
-            _button.image.overrideSprite = null;
             _buttonText.SetActive(true);
+            _button.image.overrideSprite = null;
+            _button.transform.SetParent(GameObject.Find("PausePanel").transform, true);
         }
     }
 
