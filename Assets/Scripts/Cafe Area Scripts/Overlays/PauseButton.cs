@@ -1,13 +1,9 @@
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
-using UnityEditor.IMGUI.Controls;
 using DG.Tweening;
-using Unity.Burst.Intrinsics;
-using System.Numerics;
 using Vector3 = UnityEngine.Vector3;
-using Unity.VisualScripting;
 using Vector2 = UnityEngine.Vector2;
+using System.Numerics;
 
 public class PauseButton : MonoBehaviour
 {
@@ -20,63 +16,83 @@ public class PauseButton : MonoBehaviour
     private Button _resumeButton;
     private Button _quitButton;
 
-    private GameObject _editButton;
+    [SerializeField] private Button _editButton;
     //private EditButton _editButtonScript;
-    private Vector3 defaultScale;
+    private Vector2 defaultScale;
+    private Vector2 _pauseButtonPos;
 
-    private GameObject _editBtnTransform;
-    private Vector3 _editBtnDefaultTransform;
+    private RectTransform _pbRect;
 
     void Start()
     {
+        // PausePanel'ı bul ve başlangıçta gizle
         pausePanel = GameObject.Find("PausePanel");
         defaultScale = pausePanel.transform.localScale;
         pausePanel.transform.localScale = new Vector3(0, 0, 0);
         pausePanel.SetActive(false);
 
+        // Pause butonunu bul ve tıklama olayını dinle
         _pauseButton = GameObject.Find("PauseButton").GetComponent<Button>();
         _pauseButton.onClick.AddListener(OpenPausePanel);
+        _pauseButtonPos = _pauseButton.gameObject.transform.position;
+        _pbRect = _pauseButton.GetComponent<RectTransform>();
 
-        _editButton = GameObject.Find("EditButton");
+        // Edit butonunu bul
+        _editButton = GetComponent<Button>();
         //_editButtonScript = GameObject.Find("EditButton").GetComponent<EditButton>();
-        _editBtnTransform = GameObject.Find("EditButtonMove");
-        _editBtnDefaultTransform = _editButton.transform.position;
     }
 
     private void OpenPausePanel()
     {
         pausePanel.SetActive(true); // Önce panel aktif olmalı ki üzerinde işlem yapılsın.
-        pausePanel.transform.DOScale(defaultScale, panelOpenDuration).SetEase(panelOpenEase);
+        pausePanel.transform.DOScale(defaultScale, panelOpenDuration).SetEase(panelOpenEase); //Paneli açık konuma getir.
+
         _resumeButton = GameObject.Find("ResumeButton").GetComponent<Button>();
-        _resumeButton.onClick.AddListener(ClosePausePanel);
+        _resumeButton.onClick.AddListener(ClosePausePanel); // Resume butonuna tıklandığında paneli kapat.
+
+        _editButton.gameObject.transform.position = new Vector2(100, -90); // Edit butonunu pause butonunun pozisyonuna getir.
+
         _quitButton = GameObject.Find("HomeButton").GetComponent<Button>();
-        _quitButton.onClick.AddListener(ReturnToMainMenu);
-        
+        _quitButton.onClick.AddListener(ReturnToMainMenu); // Ana menüye dön butonuna tıklandığında ana menüye dön.
     }
 
     public void ClosePausePanel()
     {
-        pausePanel.transform.DOScale(new Vector3(0, 0, 0), panelOpenDuration).SetEase(panelCloseEase).OnComplete(() =>
+        // Pause panelini kapat
+        pausePanel.transform.DOScale(new Vector2(0, 0), panelOpenDuration).SetEase(panelCloseEase).OnComplete(() =>
         {
             pausePanel.SetActive(false);
-        });
+            _pauseButton.gameObject.SetActive(true);
+            _pbRect.DOAnchorPos(new Vector2(100, 450), 0); // Pause butonunu eski pozisyonuna getir
+        });  
     }
 
     private void ReturnToMainMenu()
     {
-        StartCoroutine(ChangeScene(0));
+        StartCoroutine(ChangeScene(0)); // Ana menüye dön
     }
 
     private System.Collections.IEnumerator ChangeScene(int index)
     {
+        // Ana menüye geçiş yap
         float duration = TransitionEffect.Instance.GetDuration();
         float waitTime = TransitionEffect.Instance.GetWaitTime();
         TransitionEffect.Instance.TransitionIn(0);
         yield return new WaitForSeconds(duration + waitTime);
     }
 
-    public Vector3 EditButtonDefaultPos()
+    public void EnablePanel()
     {
-        return _editBtnDefaultTransform;
+        pausePanel.SetActive(true);
+    }
+
+    public void DisablePanel()
+    {
+        pausePanel.SetActive(false);
+    }
+
+    public Vector2 GetPauseButtonPos()
+    {
+        return _pauseButtonPos;
     }
 }

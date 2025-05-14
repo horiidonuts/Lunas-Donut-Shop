@@ -31,7 +31,7 @@ public class MenuBg : MonoBehaviour
         _timePassed += Time.deltaTime;
         var rect = _image.uvRect;
         rect.x += scrollSpeed * _timePassed;
-        _image.uvRect = rect;
+        _image.uvRect = rect; // Arkaplanın kayma efekti için UV Rect'in x değerini değiştiriyoruz
     }
 
     public void SlideImage() // Oyunu başlatırkenki kaydırma efekti
