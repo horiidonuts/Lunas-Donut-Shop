@@ -1,13 +1,13 @@
 using System.Collections;
 using DG.Tweening;
-using Unity.VisualScripting.Antlr3.Runtime.Collections;
 using UnityEngine;
-using Button = UnityEngine.UI.Button;
+using UnityEngine.UI;
+using TMPro;
 
 public class EditButton : MonoBehaviour
 {
     [SerializeField] private float duration;
-
+    [SerializeField] private GameObject _buttonObj;
     private Button _button;
     private Vector2 _originalSize;
     private GameObject _buttonText;
@@ -18,49 +18,61 @@ public class EditButton : MonoBehaviour
     [SerializeField] private Sprite exitSprite;
     [SerializeField] private float moveAmount;
 
-    private PauseButton _pauseButton;
+    [SerializeField] private GameObject _pauseButton;
+    private PauseButton _pauseButtonScript;
 
     private RectTransform _btnRect;
     private Vector2 _pauseButtonPos;
 
     private void Awake()
     {
-        _pauseButton = GameObject.Find("PauseButton").GetComponent<PauseButton>();
+        _button = _buttonObj.GetComponent<Button>();
+        _btnRect = _buttonObj.GetComponent<RectTransform>();
     }
 
     void Start()
     {
-        _pauseButtonPos = _pauseButton.GetPauseButtonPos();
-        _buttonText = GameObject.Find("EditButtonText");
-        _button = GetComponent<Button>();
-        _btnRect = GetComponent<RectTransform>();
+         //Get components of _pauseButton
+        _pauseButtonScript = _pauseButton.GetComponent<PauseButton>();
+
+        if (!_pauseButtonScript)
+        {
+            Debug.LogError("PauseButtonScript not assigned in EditButton script.");
+            return;
+        }
+
+        _buttonText = _button.GetComponentInChildren<TextMeshProUGUI>().gameObject;
         _button.onClick.AddListener(Click);
         _originalSize = _button.transform.localScale;
+        Debug.Log("Edit button will move to:" + _pauseButtonPos);
     }
 
     private void Click()
     {
-        Debug.Log(_pauseButtonPos);
         ButtonAnimation();
 
         if (editMode) // Edit modda ise tiklayinca bunlari yap
         {
             _buttonText.SetActive(true);
             _button.image.overrideSprite = null;
+            _pauseButton.SetActive(true); // Pause butonunu göster
             StartCoroutine(SetPanelAsParent());
             //_pauseButton.gameObject.SetActive(false); 
 
             /*EDIT TUSUNA BASINCA PAUSE TUSUNUN KAYBOLMASI GEREK*/
-
-            // En son butonu edit moddan çıkarttığımızda edit butonunu UI'nin altına alıyoruz.
         }
 
         if (!editMode) // Edit modda değilse tiklayinca bunlari yap
         {
-            _pauseButton.ClosePausePanel();
-            _btnRect.DOMove(_pauseButtonPos, 0);
+            _btnRect.anchorMin = new Vector2(0, 1);
+            _btnRect.anchorMax = new Vector2(0, 1);
+
+            _pauseButtonPos = _pauseButtonScript.GetPauseButtonPos();
+            _pauseButtonScript.ClosePausePanel();
+            _btnRect.DOAnchorPos(_pauseButtonPos, 0);
             _button.image.overrideSprite = exitSprite;
             _buttonText.SetActive(false);
+            _pauseButton.SetActive(false); // Pause butonunu gizle
             _button.transform.SetParent(GameObject.Find("UI").transform, false);
         }
 
@@ -87,11 +99,13 @@ public class EditButton : MonoBehaviour
 
     private IEnumerator SetPanelAsParent()
     {
-        _pauseButton.EnablePanel();
+        _pauseButtonScript.EnablePanel();
         _button.gameObject.SetActive(true);
-        _btnRect.DOAnchorPos(new Vector2(100, -90), 0).SetEase(Ease.OutQuint);
         _button.transform.SetParent(GameObject.Find("PausePanel").transform, true);
+        _btnRect.anchorMin = new Vector2(1f, 0.5f);
+        _btnRect.anchorMax = new Vector2(1f, 0.5f);
+        _btnRect.DOAnchorPos(new Vector2(-100, 0), 0);
         yield return new WaitForSeconds(0.05f);
-        _pauseButton.DisablePanel();
+        _pauseButtonScript.DisablePanel();
     }
 }

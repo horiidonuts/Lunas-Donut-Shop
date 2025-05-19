@@ -3,21 +3,24 @@ using UnityEngine.UI;
 using DG.Tweening;
 using Vector3 = UnityEngine.Vector3;
 using Vector2 = UnityEngine.Vector2;
+using System.Collections;
 using System.Numerics;
+using Unity.VisualScripting;
 
 public class PauseButton : MonoBehaviour
 {
     /* [SerializeField] */
-    private GameObject pausePanel;
+    [SerializeField] private GameObject pausePanel;
     [SerializeField] private float panelOpenDuration;
     [SerializeField] private Ease panelOpenEase;
     [SerializeField] private Ease panelCloseEase;
-    private Button _pauseButton;
-    private Button _resumeButton;
-    private Button _quitButton;
+    [SerializeField] private Button _pauseButton;
+    [SerializeField] private Button _resumeButton;
+    [SerializeField] private Button _quitButton;
 
-    [SerializeField] private Button _editButton;
-    //private EditButton _editButtonScript;
+    [SerializeField] private GameObject _editButtonObj;
+    private Button _editButton;
+    private EditButton _editButtonScript;
     private Vector2 defaultScale;
     private Vector2 _pauseButtonPos;
 
@@ -25,21 +28,24 @@ public class PauseButton : MonoBehaviour
 
     void Start()
     {
+        _editButton = _editButtonObj.GetComponent<Button>();
+        _pbRect = _pauseButton.GetComponent<RectTransform>();
+        _pauseButton = _pauseButton.GetComponent<Button>();
+        _editButtonScript = _editButtonObj.GetComponent<EditButton>();
+
         // PausePanel'ı bul ve başlangıçta gizle
-        pausePanel = GameObject.Find("PausePanel");
+
         defaultScale = pausePanel.transform.localScale;
         pausePanel.transform.localScale = new Vector3(0, 0, 0);
         pausePanel.SetActive(false);
 
         // Pause butonunu bul ve tıklama olayını dinle
-        _pauseButton = GameObject.Find("PauseButton").GetComponent<Button>();
         _pauseButton.onClick.AddListener(OpenPausePanel);
-        _pauseButtonPos = _pauseButton.gameObject.transform.position;
-        _pbRect = _pauseButton.GetComponent<RectTransform>();
 
-        // Edit butonunu bul
-        _editButton = GetComponent<Button>();
-        //_editButtonScript = GameObject.Find("EditButton").GetComponent<EditButton>();
+        _pauseButtonPos = _pbRect.anchoredPosition;
+
+
+        Debug.Log(_pauseButtonPos);
     }
 
     private void OpenPausePanel()
@@ -47,13 +53,15 @@ public class PauseButton : MonoBehaviour
         pausePanel.SetActive(true); // Önce panel aktif olmalı ki üzerinde işlem yapılsın.
         pausePanel.transform.DOScale(defaultScale, panelOpenDuration).SetEase(panelOpenEase); //Paneli açık konuma getir.
 
-        _resumeButton = GameObject.Find("ResumeButton").GetComponent<Button>();
+        _resumeButton = _resumeButton.GetComponent<Button>();
         _resumeButton.onClick.AddListener(ClosePausePanel); // Resume butonuna tıklandığında paneli kapat.
 
-        _editButton.gameObject.transform.position = new Vector2(100, -90); // Edit butonunu pause butonunun pozisyonuna getir.
+        //_editButton.gameObject.transform.position = new Vector2(100, -90); // Edit butonunu kendi yerine getir.
 
-        _quitButton = GameObject.Find("HomeButton").GetComponent<Button>();
-        _quitButton.onClick.AddListener(ReturnToMainMenu); // Ana menüye dön butonuna tıklandığında ana menüye dön.
+        // _quitButton = _quitButton.GetComponent<Button>();
+        // _quitButton.onClick.AddListener(ReturnToMainMenu); // Ana menüye dön butonuna tıklandığında ana menüye dön.
+
+        _pauseButton.gameObject.SetActive(false); // Pause butonunu gizle
     }
 
     public void ClosePausePanel()
@@ -62,24 +70,25 @@ public class PauseButton : MonoBehaviour
         pausePanel.transform.DOScale(new Vector2(0, 0), panelOpenDuration).SetEase(panelCloseEase).OnComplete(() =>
         {
             pausePanel.SetActive(false);
-            _pauseButton.gameObject.SetActive(true);
-            _pbRect.DOAnchorPos(new Vector2(100, 450), 0); // Pause butonunu eski pozisyonuna getir
-        });  
+
+            if (_editButtonScript.IsInEditMode())
+            {
+                _pauseButton.gameObject.SetActive(false); // Edit modunda pause butonunu gizle
+            }
+            if (!_editButtonScript.IsInEditMode())
+            {
+                _pauseButton.gameObject.SetActive(true); // Edit modunda değilse pause butonunu göster
+            }
+            _pbRect.DOAnchorPos(new Vector2(100, -90), 0); // Pause butonunu eski pozisyonuna getir
+        });
     }
 
     private void ReturnToMainMenu()
     {
-        StartCoroutine(ChangeScene(0)); // Ana menüye dön
+        
     }
 
-    private System.Collections.IEnumerator ChangeScene(int index)
-    {
-        // Ana menüye geçiş yap
-        float duration = TransitionEffect.Instance.GetDuration();
-        float waitTime = TransitionEffect.Instance.GetWaitTime();
-        TransitionEffect.Instance.TransitionIn(0);
-        yield return new WaitForSeconds(duration + waitTime);
-    }
+    
 
     public void EnablePanel()
     {
