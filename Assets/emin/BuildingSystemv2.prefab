@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 5467665820921995417}
   - component: {fileID: 3418862894298221981}
   m_Layer: 0
-  m_Name: InputManager
+  m_Name: InputManager(add main camera when in scene)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
