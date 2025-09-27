@@ -20,11 +20,12 @@ public class SimpleGridSystem : MonoBehaviour
     
     private Vector3 mouseWorldPosition;
     private Vector3Int gridCellPosition;
-    private Vector3Int previousGridCellPosition;
+    private Vector3Int previousGridCellPosition = new Vector3Int(int.MinValue, int.MinValue, int.MinValue);
     private Vector3 gridWorldPosition;
     private Vector3 targetPosition;
     private Vector3 currentIndicatorPosition;
     private GameObject currentPlane; // Hangi plane üzerindeyiz
+    private bool needsIndicatorUpdate;
     
     void Start()
     {
@@ -56,52 +57,37 @@ public class SimpleGridSystem : MonoBehaviour
             currentIndicatorPosition = cellIndicator.transform.position;
         }
         
-        previousGridCellPosition = Vector3Int.one * -999; // Invalid başlangıç değeri
+        // Invalid başlangıç değeri artık constructor'da ayarlandı
+        needsIndicatorUpdate = true;
     }
     
     void Update()
     {
         UpdateMousePosition();
         UpdateGridPosition();
-        UpdateCellIndicator();
+        
+        // Sadece gerektiğinde indicator'ı güncelle
+        if (needsIndicatorUpdate)
+            UpdateCellIndicator();
     }
     
     void UpdateMousePosition()
     {
-        // Mouse pozisyonunu world space'e çevir
         Vector3 mouseScreenPos = Input.mousePosition;
         Ray ray = playerCamera.ScreenPointToRay(mouseScreenPos);
         
-        // Tüm raycast hit'lerini al (duvarın arkasındaki objeleri de bul)
-        RaycastHit[] hits = Physics.RaycastAll(ray, 100f, groundLayer);
-        
-        // GridPlane tag'ine sahip en yakın objeyi bul
-        GameObject foundPlane = null;
-        float closestDistance = float.MaxValue;
-        Vector3 bestHitPoint = Vector3.zero;
-        
-        foreach (RaycastHit hit in hits)
+        // Tek raycast ile ilk GridPlane'i bul (daha performanslı)
+        if (Physics.Raycast(ray, out RaycastHit hit, 100f, groundLayer))
         {
             if (hit.collider.gameObject.CompareTag(gridPlaneTag))
             {
-                if (hit.distance < closestDistance)
-                {
-                    closestDistance = hit.distance;
-                    foundPlane = hit.collider.gameObject;
-                    bestHitPoint = hit.point;
-                }
+                mouseWorldPosition = hit.point;
+                currentPlane = hit.collider.gameObject;
+                return;
             }
         }
         
-        if (foundPlane != null)
-        {
-            mouseWorldPosition = bestHitPoint;
-            currentPlane = foundPlane;
-        }
-        else
-        {
-            currentPlane = null;
-        }
+        currentPlane = null;
     }
     
     void UpdateGridPosition()
@@ -110,51 +96,63 @@ public class SimpleGridSystem : MonoBehaviour
         if (currentPlane == null)
         {
             // CellIndicator'ı gizle
-            if (cellIndicator != null)
+            if (cellIndicator != null && cellIndicator.activeInHierarchy)
+            {
                 cellIndicator.SetActive(false);
+                needsIndicatorUpdate = false;
+            }
             return;
         }
         
         // CellIndicator'ı göster
-        if (cellIndicator != null)
+        if (cellIndicator != null && !cellIndicator.activeInHierarchy)
             cellIndicator.SetActive(true);
         
         // Unity Grid ile basit snap
-        gridCellPosition = grid.WorldToCell(mouseWorldPosition);
-        gridWorldPosition = grid.CellToWorld(gridCellPosition);
+        Vector3Int newGridCellPosition = grid.WorldToCell(mouseWorldPosition);
         
-        // Grid center'a getir
-        gridWorldPosition += grid.cellSize * 0.5f;
-        
-        // Y pozisyonunu plane yüksekliğine ayarla
-        gridWorldPosition.y = currentPlane.transform.position.y;
-        
-        // Yeni grid cell'e geçildiyse animasyonu resetle
-        if (gridCellPosition != previousGridCellPosition)
+        // Sadece pozisyon değiştiyse güncelle
+        if (newGridCellPosition != gridCellPosition)
         {
-            // Target pozisyonunu plane'in üstünde ayarla
+            gridCellPosition = newGridCellPosition;
+            gridWorldPosition = grid.CellToWorld(gridCellPosition);
+            
+            // Grid center'a getir
+            gridWorldPosition += grid.cellSize * 0.5f;
+            
+            // Y pozisyonunu plane yüksekliğine ayarla
+            gridWorldPosition.y = currentPlane.transform.position.y;
+            
+            // Target pozisyonunu hesapla
             targetPosition = new Vector3(gridWorldPosition.x, gridWorldPosition.y + targetHeight, gridWorldPosition.z);
             
-            // Aşağıdan başlat
-            currentIndicatorPosition = new Vector3(gridWorldPosition.x, gridWorldPosition.y - 0.5f, gridWorldPosition.z);
+            // Yeni grid cell'e geçildiyse animasyonu resetle
+            if (gridCellPosition != previousGridCellPosition)
+            {
+                // Aşağıdan başlat
+                currentIndicatorPosition = new Vector3(gridWorldPosition.x, gridWorldPosition.y - 0.5f, gridWorldPosition.z);
+                previousGridCellPosition = gridCellPosition;
+            }
             
-            previousGridCellPosition = gridCellPosition;
-        }
-        else
-        {
-            // Aynı cell'de, target pozisyonunu güncelle
-            targetPosition = new Vector3(gridWorldPosition.x, gridWorldPosition.y + targetHeight, gridWorldPosition.z);
+            needsIndicatorUpdate = true;
         }
     }
     
     void UpdateCellIndicator()
     {
-        // GridPlane tag'li plane üzerinde değilsek return
         if (cellIndicator != null && currentPlane != null)
         {
             // Smooth interpolation ile yukarı çık
             currentIndicatorPosition = Vector3.Lerp(currentIndicatorPosition, targetPosition, animationSpeed * Time.deltaTime);
             cellIndicator.transform.position = currentIndicatorPosition;
+            
+            // Hedefe ulaştıysa güncellemeyi durdur
+            if (Vector3.Distance(currentIndicatorPosition, targetPosition) < 0.01f)
+            {
+                cellIndicator.transform.position = targetPosition;
+                currentIndicatorPosition = targetPosition;
+                needsIndicatorUpdate = false;
+            }
         }
     }
     
