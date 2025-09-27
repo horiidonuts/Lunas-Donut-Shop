@@ -514,6 +514,10 @@ PrefabInstance:
       propertyPath: animationSpeed
       value: 15
       objectReference: {fileID: 0}
+    - target: {fileID: 3225171724352159943, guid: 72420609b5374664387e2ef8775aa564, type: 3}
+      propertyPath: useCustomOrigin
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3284503658638237731, guid: 72420609b5374664387e2ef8775aa564, type: 3}
       propertyPath: m_Name
       value: GridSystem
@@ -556,18 +560,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6547402775484383213, guid: 72420609b5374664387e2ef8775aa564, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9054015438693716764, guid: 72420609b5374664387e2ef8775aa564, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9054015438693716764, guid: 72420609b5374664387e2ef8775aa564, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9054015438693716764, guid: 72420609b5374664387e2ef8775aa564, type: 3}
-      propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
