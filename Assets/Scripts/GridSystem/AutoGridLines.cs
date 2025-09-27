@@ -37,12 +37,112 @@ public class AutoGridLines : MonoBehaviour
     {
         GameObject[] gridPlanes = GameObject.FindGameObjectsWithTag(gridPlaneTag);
         
-        foreach (GameObject plane in gridPlanes)
+        if (useCustomOrigin)
         {
-            CreateGridLinesForPlane(plane);
+            // Custom origin kullanıldığında tek büyük grid oluştur
+            CreateSingleGridForAllPlanes(gridPlanes);
+        }
+        else
+        {
+            // Normal mod: Her plane için ayrı grid
+            foreach (GameObject plane in gridPlanes)
+            {
+                CreateGridLinesForPlane(plane);
+            }
         }
         
-        Debug.Log($"Grid çizgileri {gridPlanes.Length} plane için oluşturuldu.");
+        Debug.Log($"Grid çizgileri {gridPlanes.Length} plane için oluşturuldu. Custom Origin: {useCustomOrigin}");
+    }
+    
+    void CreateSingleGridForAllPlanes(GameObject[] planes)
+    {
+        if (planes.Length == 0) return;
+        
+        // Grid origin
+        Vector3 gridOrigin = transform.position + customOriginOffset;
+        
+        // Tek parent object oluştur
+        GameObject gridParent = new GameObject("CombinedGridLines");
+        gridParent.transform.SetParent(transform);
+        
+        List<GameObject> allLines = new List<GameObject>();
+        
+        // Her plane için sadece o plane üstündeki çizgileri oluştur
+        foreach (GameObject plane in planes)
+        {
+            Bounds planeBounds = GetPlaneBounds(plane);
+            CreateGridLinesForPlaneBounds(planeBounds, gridOrigin, gridParent.transform, allLines);
+        }
+        
+        // Tüm plane'ler için aynı line listesini kaydet
+        foreach (GameObject plane in planes)
+        {
+            planeGridLines[plane] = allLines;
+        }
+    }
+    
+    void CreateGridLinesForPlaneBounds(Bounds planeBounds, Vector3 gridOrigin, Transform parent, List<GameObject> allLines)
+    {
+        // Plane'in gerçek sınırları
+        float minX = planeBounds.min.x;
+        float maxX = planeBounds.max.x;
+        float minZ = planeBounds.min.z;
+        float maxZ = planeBounds.max.z;
+        float planeY = planeBounds.center.y;
+        
+        // Grid origin'e göre start/end grid koordinatları
+        int startX = Mathf.FloorToInt((minX - gridOrigin.x) / gridCellSize);
+        int endX = Mathf.CeilToInt((maxX - gridOrigin.x) / gridCellSize);
+        int startZ = Mathf.FloorToInt((minZ - gridOrigin.z) / gridCellSize);
+        int endZ = Mathf.CeilToInt((maxZ - gridOrigin.z) / gridCellSize);
+        
+        // Dikey çizgiler (X ekseni boyunca)
+        for (int x = startX; x <= endX; x++)
+        {
+            float lineX = gridOrigin.x + x * gridCellSize;
+            
+            // Çizgiyi plane bounds içine kırp
+            Vector3 lineStart = new Vector3(lineX, planeY + lineHeight, Mathf.Max(minZ, gridOrigin.z + startZ * gridCellSize));
+            Vector3 lineEnd = new Vector3(lineX, planeY + lineHeight, Mathf.Min(maxZ, gridOrigin.z + endZ * gridCellSize));
+            
+            // Çizgi plane içinde mi kontrol et
+            if (lineX >= minX && lineX <= maxX && lineStart.z < lineEnd.z)
+            {
+                string lineName = $"VerticalLine_X{x}_Plane{planeBounds.center.x:F1}_{planeBounds.center.z:F1}";
+                GameObject line = CreateLine(lineName, lineStart, lineEnd, parent);
+                allLines.Add(line);
+            }
+        }
+        
+        // Yatay çizgiler (Z ekseni boyunca)
+        for (int z = startZ; z <= endZ; z++)
+        {
+            float lineZ = gridOrigin.z + z * gridCellSize;
+            
+            // Çizgiyi plane bounds içine kırp
+            Vector3 lineStart = new Vector3(Mathf.Max(minX, gridOrigin.x + startX * gridCellSize), planeY + lineHeight, lineZ);
+            Vector3 lineEnd = new Vector3(Mathf.Min(maxX, gridOrigin.x + endX * gridCellSize), planeY + lineHeight, lineZ);
+            
+            // Çizgi plane içinde mi kontrol et
+            if (lineZ >= minZ && lineZ <= maxZ && lineStart.x < lineEnd.x)
+            {
+                string lineName = $"HorizontalLine_Z{z}_Plane{planeBounds.center.x:F1}_{planeBounds.center.z:F1}";
+                GameObject line = CreateLine(lineName, lineStart, lineEnd, parent);
+                allLines.Add(line);
+            }
+        }
+    }
+    
+    Bounds GetPlaneBounds(GameObject plane)
+    {
+        Collider planeCollider = plane.GetComponent<Collider>();
+        if (planeCollider != null)
+        {
+            return planeCollider.bounds;
+        }
+        
+        // Collider yoksa transform pozisyonundan varsayılan boyut
+        return new Bounds(plane.transform.position, Vector3.one * gridCellSize);
     }
     
     void CreateGridLinesForPlane(GameObject plane)
@@ -167,16 +267,50 @@ public class AutoGridLines : MonoBehaviour
         if (planeGridLines.ContainsKey(plane))
         {
             List<GameObject> lines = planeGridLines[plane];
-            foreach (GameObject line in lines)
+            
+            // Custom origin modunda aynı line'lar birden fazla plane'de olabilir
+            // Sadece ilk plane line'ları silsin
+            bool shouldDestroyLines = true;
+            if (useCustomOrigin)
             {
-                if (line != null)
+                // Bu line'ları kullanan başka plane var mı kontrol et
+                foreach (var kvp in planeGridLines)
                 {
-                    if (Application.isPlaying)
-                        Destroy(line);
-                    else
-                        DestroyImmediate(line);
+                    if (kvp.Key != plane && kvp.Value == lines)
+                    {
+                        shouldDestroyLines = false;
+                        break;
+                    }
                 }
             }
+            
+            if (shouldDestroyLines)
+            {
+                foreach (GameObject line in lines)
+                {
+                    if (line != null)
+                    {
+                        if (Application.isPlaying)
+                            Destroy(line);
+                        else
+                            DestroyImmediate(line);
+                    }
+                }
+                
+                // Parent object'i de sil (CombinedGridLines)
+                if (lines.Count > 0 && lines[0] != null && lines[0].transform.parent != null)
+                {
+                    GameObject parent = lines[0].transform.parent.gameObject;
+                    if (parent.name.Contains("CombinedGridLines"))
+                    {
+                        if (Application.isPlaying)
+                            Destroy(parent);
+                        else
+                            DestroyImmediate(parent);
+                    }
+                }
+            }
+            
             lines.Clear();
             planeGridLines.Remove(plane);
         }
