@@ -89,18 +89,81 @@ public class SimpleGridSystem : MonoBehaviour
         Vector3 mouseScreenPos = Input.mousePosition;
         Ray ray = playerCamera.ScreenPointToRay(mouseScreenPos);
         
-        // Tek raycast ile ilk GridPlane'i bul (daha performanslı)
-        if (Physics.Raycast(ray, out RaycastHit hit, 100f, groundLayer))
+        // Tüm raycast hit'lerini al ve GridPlane'i ara
+        RaycastHit[] hits = Physics.RaycastAll(ray, 100f, groundLayer);
+        
+        GameObject foundPlane = null;
+        Vector3 bestHitPoint = Vector3.zero;
+        
+        foreach (RaycastHit hit in hits)
         {
             if (hit.collider.gameObject.CompareTag(gridPlaneTag))
             {
-                mouseWorldPosition = hit.point;
-                currentPlane = hit.collider.gameObject;
-                return;
+                foundPlane = hit.collider.gameObject;
+                bestHitPoint = hit.point;
+                break; // İlk GridPlane'i bulduk
             }
         }
         
-        currentPlane = null;
+        if (foundPlane != null)
+        {
+            mouseWorldPosition = bestHitPoint;
+            currentPlane = foundPlane;
+        }
+        else
+        {
+            // GridPlane bulunamadı, mouse'u plane üzerine project et
+            ProjectMouseOntoNearestPlane(ray);
+        }
+    }
+    
+    void ProjectMouseOntoNearestPlane(Ray ray)
+    {
+        // Tüm GridPlane'leri bul
+        GameObject[] allGridPlanes = GameObject.FindGameObjectsWithTag(gridPlaneTag);
+        
+        if (allGridPlanes.Length == 0)
+        {
+            currentPlane = null;
+            return;
+        }
+        
+        GameObject nearestPlane = null;
+        Vector3 nearestPoint = Vector3.zero;
+        float nearestDistance = float.MaxValue;
+        
+        foreach (GameObject plane in allGridPlanes)
+        {
+            // Ray'i plane üzerine project et
+            Plane planeGeometry = new Plane(Vector3.up, plane.transform.position);
+            
+            if (planeGeometry.Raycast(ray, out float distance))
+            {
+                Vector3 hitPoint = ray.GetPoint(distance);
+                
+                // Bu nokta plane'in bounds'u içinde mi kontrol et
+                Collider planeCollider = plane.GetComponent<Collider>();
+                if (planeCollider != null && planeCollider.bounds.Contains(hitPoint))
+                {
+                    if (distance < nearestDistance)
+                    {
+                        nearestDistance = distance;
+                        nearestPlane = plane;
+                        nearestPoint = hitPoint;
+                    }
+                }
+            }
+        }
+        
+        if (nearestPlane != null)
+        {
+            mouseWorldPosition = nearestPoint;
+            currentPlane = nearestPlane;
+        }
+        else
+        {
+            currentPlane = null;
+        }
     }
     
     void UpdateGridPosition()

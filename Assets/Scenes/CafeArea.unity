@@ -6784,6 +6784,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 963194227}
     - target: {fileID: 3225171724352159943, guid: 72420609b5374664387e2ef8775aa564, type: 3}
+      propertyPath: targetHeight
+      value: 0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 3225171724352159943, guid: 72420609b5374664387e2ef8775aa564, type: 3}
       propertyPath: gridOriginOffset.x
       value: 0.75
       objectReference: {fileID: 0}
