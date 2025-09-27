@@ -2674,7 +2674,7 @@ GameObject:
   - component: {fileID: 619510218}
   m_Layer: 0
   m_Name: Quad (1)
-  m_TagString: Untagged
+  m_TagString: GridPlane
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2981,7 +2981,7 @@ GameObject:
   - component: {fileID: 699249823}
   m_Layer: 0
   m_Name: Quad
-  m_TagString: Untagged
+  m_TagString: GridPlane
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4783,7 +4783,7 @@ GameObject:
   - component: {fileID: 838413898}
   m_Layer: 0
   m_Name: Quad (3)
-  m_TagString: Untagged
+  m_TagString: GridPlane
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6767,6 +6767,115 @@ Light:
   m_LightUnit: 1
   m_LuxAtDistance: 1
   m_EnableSpotReflector: 1
+--- !u!1001 &1024698637
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3225171724352159943, guid: 72420609b5374664387e2ef8775aa564, type: 3}
+      propertyPath: gridSize
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3225171724352159943, guid: 72420609b5374664387e2ef8775aa564, type: 3}
+      propertyPath: playerCamera
+      value: 
+      objectReference: {fileID: 963194227}
+    - target: {fileID: 3225171724352159943, guid: 72420609b5374664387e2ef8775aa564, type: 3}
+      propertyPath: gridOriginOffset.x
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 3225171724352159943, guid: 72420609b5374664387e2ef8775aa564, type: 3}
+      propertyPath: gridOriginOffset.z
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 3284503658638237731, guid: 72420609b5374664387e2ef8775aa564, type: 3}
+      propertyPath: m_Name
+      value: GridSystem
+      objectReference: {fileID: 0}
+    - target: {fileID: 6313586342366502659, guid: 72420609b5374664387e2ef8775aa564, type: 3}
+      propertyPath: lineWidth
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 6313586342366502659, guid: 72420609b5374664387e2ef8775aa564, type: 3}
+      propertyPath: gridCellSize
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6313586342366502659, guid: 72420609b5374664387e2ef8775aa564, type: 3}
+      propertyPath: useCustomOrigin
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6313586342366502659, guid: 72420609b5374664387e2ef8775aa564, type: 3}
+      propertyPath: defaultGridSize.x
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6313586342366502659, guid: 72420609b5374664387e2ef8775aa564, type: 3}
+      propertyPath: defaultGridSize.y
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6313586342366502659, guid: 72420609b5374664387e2ef8775aa564, type: 3}
+      propertyPath: customOriginOffset.x
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 6313586342366502659, guid: 72420609b5374664387e2ef8775aa564, type: 3}
+      propertyPath: customOriginOffset.z
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 6547402775484383213, guid: 72420609b5374664387e2ef8775aa564, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.75227
+      objectReference: {fileID: 0}
+    - target: {fileID: 6547402775484383213, guid: 72420609b5374664387e2ef8775aa564, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.37467
+      objectReference: {fileID: 0}
+    - target: {fileID: 6547402775484383213, guid: 72420609b5374664387e2ef8775aa564, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.74942
+      objectReference: {fileID: 0}
+    - target: {fileID: 6547402775484383213, guid: 72420609b5374664387e2ef8775aa564, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6547402775484383213, guid: 72420609b5374664387e2ef8775aa564, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6547402775484383213, guid: 72420609b5374664387e2ef8775aa564, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6547402775484383213, guid: 72420609b5374664387e2ef8775aa564, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6547402775484383213, guid: 72420609b5374664387e2ef8775aa564, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6547402775484383213, guid: 72420609b5374664387e2ef8775aa564, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6547402775484383213, guid: 72420609b5374664387e2ef8775aa564, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9054015438693716764, guid: 72420609b5374664387e2ef8775aa564, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 9054015438693716764, guid: 72420609b5374664387e2ef8775aa564, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.4
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 72420609b5374664387e2ef8775aa564, type: 3}
 --- !u!1001 &1083796736
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7298,7 +7407,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 291714439, guid: 3ffd7e791ae4a4a42b044f4c7e881297, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -9873,7 +9982,7 @@ GameObject:
   - component: {fileID: 1737293823}
   m_Layer: 0
   m_Name: Quad (2)
-  m_TagString: Untagged
+  m_TagString: GridPlane
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -12177,6 +12286,7 @@ SceneRoots:
   - {fileID: 1920791881}
   - {fileID: 640444156}
   - {fileID: 514414270}
+  - {fileID: 1024698637}
   - {fileID: 116032382}
   - {fileID: 301258784}
   - {fileID: 1701893564}

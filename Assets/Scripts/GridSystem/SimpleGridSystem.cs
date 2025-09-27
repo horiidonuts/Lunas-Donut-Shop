@@ -4,7 +4,7 @@ public class SimpleGridSystem : MonoBehaviour
 {
     [Header("Grid Settings")]
     [SerializeField] private Grid grid;
-    [SerializeField] private float gridSize = 1f;
+    [SerializeField] private float gridSize = 0.5f;
     [SerializeField] private string gridPlaneTag = "GridPlane";
     [SerializeField] private Vector3 gridOriginOffset = Vector3.zero;
     [SerializeField] private bool useCustomOrigin = false;
@@ -45,9 +45,11 @@ public class SimpleGridSystem : MonoBehaviour
             if (grid == null)
             {
                 grid = gameObject.AddComponent<Grid>();
-                grid.cellSize = Vector3.one * gridSize;
             }
         }
+        
+        // Grid cell size'ını her durumda güncelle
+        grid.cellSize = Vector3.one * gridSize;
         
         // Custom origin kullanılıyorsa grid transform'unu ayarla
         if (useCustomOrigin)
